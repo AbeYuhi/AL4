@@ -42,7 +42,8 @@ void InGameScene::Initialize() {
 	//ブレンドモード
 	blendMode_ = kBlendModeNormal;
 
-
+	player_ = std::make_unique<Player>();
+	player_->Initialize();
 }
 
 void InGameScene::Update() {
@@ -64,7 +65,7 @@ void InGameScene::Update() {
 	//ライトの更新
 	lightObj_->Update();
 
-
+	player_->Update();
 
 	ImGui::Begin("BlendMode");
 	const char* modes[] = { "None", "Normal", "Add", "SubTract", "MultiPly", "Screen"};
@@ -95,7 +96,7 @@ void InGameScene::Draw() {
 
 	///オブジェクトの描画開始
 
-
+	player_->Draw();
 
 	///オブジェクトの描画終了
 

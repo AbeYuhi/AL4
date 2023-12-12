@@ -10,14 +10,14 @@ void LightObject::Initialize() {
 	lightResource_->Map(0, nullptr, reinterpret_cast<void**>(&lightData_));
 
 	for (int index = 0; index < kDirectionLightNum; index++) {
-		lightData_->directionalLight[index].type = 2;
+		lightData_->directionalLight[index].type = 0;
 		lightData_->directionalLight[index].color = { 1.0f, 1.0f, 1.0f, 1.0f };
 		lightData_->directionalLight[index].direction = { 0.0f, -1.0f, 0.0f };
 		lightData_->directionalLight[index].intensity = 1.0f;
 	}
 
 	for (int index = 0; index < kPointLightNum; index++) {
-		lightData_->pointLight[index].type = 2;
+		lightData_->pointLight[index].type = 0;
 		lightData_->pointLight[index].color = { 1.0f, 1.0f, 1.0f, 1.0f };
 		lightData_->pointLight[index].position = { 0.0f, 0.0f, 0.0f };
 		lightData_->pointLight[index].intensity = 1.0f;
@@ -26,7 +26,7 @@ void LightObject::Initialize() {
 	}
 
 	for (int index = 0; index < kSpotLightNum; index++) {
-		lightData_->spotLight[index].lightingType = 2;
+		lightData_->spotLight[index].lightingType = 0;
 		lightData_->spotLight[index].color = { 1.0f, 1.0f, 1.0f, 1.0f };
 		lightData_->spotLight[index].position = { 0, 2, -5 };
 		lightData_->spotLight[index].intensity = 5.0f;

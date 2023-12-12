@@ -18,6 +18,7 @@
 #include "DirectXGame/GameObject/Camera/SpriteCamera.h"
 #include "DirectXGame/GameObject/Light/LightObject.h"
 #include "DirectXGame/GameObject/Particle/testParticle.h"
+#include "DirectXGame/GameObject/Entity/Player.h"
 #include "DirectXGame/Scene/IScene.h"
 
 class InGameScene : public IScene {
@@ -53,10 +54,6 @@ private:
 	//ブレンドモード
 	int blendMode_;
 
-	//テクスチャハンドル
-
-
-	//モデルデータ
-	
+	std::unique_ptr<Player> player_;
 
 };

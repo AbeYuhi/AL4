@@ -16,7 +16,7 @@ public:
 	static const UINT kMaxTextureNum_ = 1000;
 	static UINT sTextureNum_;
 
-	static uint32_t Load(const std::string& textureName);
+	static uint32_t Load(const std::string& textureName = "whiteTexture2x2.png");
 
 	static uint32_t Load(const std::string& textureName, const std::string& filePath);
 
