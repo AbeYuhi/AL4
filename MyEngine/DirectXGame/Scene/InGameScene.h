@@ -52,28 +52,4 @@ private:
 
 	//ブレンドモード
 	int blendMode_;
-
-	//テクスチャハンドル
-	uint32_t monsterBallHandle_;
-	uint32_t fenceHandle_;
-
-	Vector2 windowPos_;
-
-	//描画モデル
-	std::unique_ptr<TestParticle> testParticle1_;
-
-	std::unique_ptr<Model> groundModel_;
-	RenderItem groundModelInfo_;
-
-	std::unique_ptr<Sphere> monsterBall_;
-	RenderItem monsterBallInfo_;
-
-	std::unique_ptr<Sprite> sprite_;
-	RenderItem spriteInfo_;
-
-	std::unique_ptr<WireFrameBox> wireFrameBox_;
-	RenderItem wireFrameBoxInfo_;
-
-	//サウンド
-	uint32_t soundHandle_;
 };
