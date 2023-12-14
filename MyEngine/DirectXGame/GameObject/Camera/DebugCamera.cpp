@@ -12,7 +12,7 @@ void DebugCamera::Initialize() {
 
 	transform_.scale_ = { 1, 1, 1 };
 	transform_.rotate_ = { 0.0f, 0.0f, 0.0f };
-	transform_.translate_ = { 0.0f, 0.0f, -10.0f };
+	transform_.translate_ = { 0.0f, 0.0f, -25.0f };
 	worldMatrix_ = MakeAffineMatrix(transform_.scale_, transform_.rotate_, transform_.translate_);
 
 	//マウスの位置

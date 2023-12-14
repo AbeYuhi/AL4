@@ -18,7 +18,8 @@
 #include "DirectXGame/GameObject/Camera/SpriteCamera.h"
 #include "DirectXGame/GameObject/Light/LightObject.h"
 #include "DirectXGame/GameObject/Particle/testParticle.h"
-#include "DirectXGame/GameObject/Entity/Player.h"
+#include "DirectXGame/GameObject/Entity/Player/Player.h"
+#include "DirectXGame/GameObject/Entity/Enemy/Enemy.h"
 #include "DirectXGame/Scene/IScene.h"
 
 class InGameScene : public IScene {
@@ -55,5 +56,6 @@ private:
 	int blendMode_;
 
 	std::unique_ptr<Player> player_;
+	std::unique_ptr<Enemy> enemy_;
 
 };

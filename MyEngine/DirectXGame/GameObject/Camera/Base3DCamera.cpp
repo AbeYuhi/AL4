@@ -11,8 +11,6 @@ Base3DCamera::~Base3DCamera()
 void Base3DCamera::Initialize() {
 
 	transform_.Initialize();
-	transform_.translate_.y = 5;
-	transform_.translate_.z = -10;
 	worldMatrix_ = MakeAffineMatrix(transform_.scale_, transform_.rotate_, transform_.translate_);
 
 	//カメラが切り取る範囲

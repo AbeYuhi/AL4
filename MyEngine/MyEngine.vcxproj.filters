@@ -97,6 +97,24 @@
     <Filter Include="ソース ファイル\GameObject\Entity">
       <UniqueIdentifier>{c487ebaf-8159-43f2-ad22-6be2ed54604c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\GameObject\Entity\Player">
+      <UniqueIdentifier>{d393e817-5f52-4ae9-825d-b08e3c80d1a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\GameObject\Entity\Player">
+      <UniqueIdentifier>{4853258a-2975-4e9f-ad2b-afbec1b8464e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\Entity\Enemy">
+      <UniqueIdentifier>{bcc756e0-bf31-4238-9e5d-80b9c0b63bdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\GameObject\Entity\Enemy">
+      <UniqueIdentifier>{cecf1767-5659-4e4b-9779-ebc006c0275d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\Entity\Enemy\State">
+      <UniqueIdentifier>{e703f215-b1c2-401e-956c-5654e6abd2af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\GameObject\Entity\Enemy\State">
+      <UniqueIdentifier>{d9e5542f-fb50-4471-a25d-162c0e98413f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -252,8 +270,23 @@
     <ClCompile Include="DirectXGame\Scene\SceneFactory\SceneFactory.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="DirectXGame\GameObject\Entity\Player.cpp">
-      <Filter>ソース ファイル\GameObject\Entity</Filter>
+    <ClCompile Include="DirectXGame\GameObject\Entity\Player\Player.cpp">
+      <Filter>ソース ファイル\GameObject\Entity\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXGame\GameObject\Entity\Player\PlayerBullet.cpp">
+      <Filter>ソース ファイル\GameObject\Entity\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXGame\GameObject\Entity\Enemy\Enemy.cpp">
+      <Filter>ソース ファイル\GameObject\Entity\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXGame\GameObject\Entity\Enemy\State\BaseEnemyState.cpp">
+      <Filter>ソース ファイル\GameObject\Entity\Enemy\State</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXGame\GameObject\Entity\Enemy\State\EnemyStateApproach.cpp">
+      <Filter>ソース ファイル\GameObject\Entity\Enemy\State</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXGame\GameObject\Entity\Enemy\State\EnemyStateLeave.cpp">
+      <Filter>ソース ファイル\GameObject\Entity\Enemy\State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -464,8 +497,23 @@
     <ClInclude Include="DirectXGame\Scene\SceneFactory\SceneFactory.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="DirectXGame\GameObject\Entity\Player.h">
-      <Filter>ヘッダー ファイル\GameObject\Entity</Filter>
+    <ClInclude Include="DirectXGame\GameObject\Entity\Player\Player.h">
+      <Filter>ヘッダー ファイル\GameObject\Entity\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXGame\GameObject\Entity\Player\PlayerBullet.h">
+      <Filter>ヘッダー ファイル\GameObject\Entity\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXGame\GameObject\Entity\Enemy\Enemy.h">
+      <Filter>ヘッダー ファイル\GameObject\Entity\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXGame\GameObject\Entity\Enemy\State\BaseEnemyState.h">
+      <Filter>ヘッダー ファイル\GameObject\Entity\Enemy\State</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXGame\GameObject\Entity\Enemy\State\EnemyStateApproach.h">
+      <Filter>ヘッダー ファイル\GameObject\Entity\Enemy\State</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXGame\GameObject\Entity\Enemy\State\EnemyStateLeave.h">
+      <Filter>ヘッダー ファイル\GameObject\Entity\Enemy\State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

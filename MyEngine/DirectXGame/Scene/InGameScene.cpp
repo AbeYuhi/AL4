@@ -44,6 +44,9 @@ void InGameScene::Initialize() {
 
 	player_ = std::make_unique<Player>();
 	player_->Initialize();
+
+	enemy_ = std::make_unique<Enemy>();
+	enemy_->Initialize();
 }
 
 void InGameScene::Update() {
@@ -66,6 +69,7 @@ void InGameScene::Update() {
 	lightObj_->Update();
 
 	player_->Update();
+	enemy_->Update();
 
 	ImGui::Begin("BlendMode");
 	const char* modes[] = { "None", "Normal", "Add", "SubTract", "MultiPly", "Screen"};
@@ -97,6 +101,7 @@ void InGameScene::Draw() {
 	///オブジェクトの描画開始
 
 	player_->Draw();
+	enemy_->Draw();
 
 	///オブジェクトの描画終了
 
