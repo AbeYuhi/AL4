@@ -115,6 +115,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DirectXGame\GameObject\Entity\Enemy\Enemy.cpp" />
     <ClCompile Include="DirectXGame\GameObject\Entity\Enemy\State\EnemyStateApproach.cpp" />
     <ClCompile Include="DirectXGame\GameObject\Entity\Enemy\State\EnemyStateLeave.cpp" />
+    <ClCompile Include="DirectXGame\GameObject\Entity\Enemy\EnemyBullet.cpp" />
     <ClCompile Include="External\imgui\imgui.cpp" />
     <ClCompile Include="External\imgui\imgui_demo.cpp" />
     <ClCompile Include="External\imgui\imgui_draw.cpp" />
@@ -186,6 +187,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DirectXGame\GameObject\Entity\Enemy\Enemy.h" />
     <ClInclude Include="DirectXGame\GameObject\Entity\Enemy\State\EnemyStateApproach.h" />
     <ClInclude Include="DirectXGame\GameObject\Entity\Enemy\State\EnemyStateLeave.h" />
+    <ClInclude Include="DirectXGame\GameObject\Entity\Enemy\EnemyBullet.h" />
     <ClInclude Include="External\imgui\imconfig.h" />
     <ClInclude Include="External\imgui\imgui.h" />
     <ClInclude Include="External\imgui\imgui_impl_dx12.h" />

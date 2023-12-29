@@ -288,6 +288,9 @@
     <ClCompile Include="DirectXGame\GameObject\Entity\Enemy\State\EnemyStateLeave.cpp">
       <Filter>ソース ファイル\GameObject\Entity\Enemy\State</Filter>
     </ClCompile>
+    <ClCompile Include="DirectXGame\GameObject\Entity\Enemy\EnemyBullet.cpp">
+      <Filter>ソース ファイル\GameObject\Entity\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectXGame\Object\Triangle.h">
@@ -514,6 +517,9 @@
     </ClInclude>
     <ClInclude Include="DirectXGame\GameObject\Entity\Enemy\State\EnemyStateLeave.h">
       <Filter>ヘッダー ファイル\GameObject\Entity\Enemy\State</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXGame\GameObject\Entity\Enemy\EnemyBullet.h">
+      <Filter>ヘッダー ファイル\GameObject\Entity\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

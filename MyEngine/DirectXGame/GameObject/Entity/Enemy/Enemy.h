@@ -6,6 +6,7 @@
 #include "DirectXGame/Manager/InputManager.h"
 #include "DirectXGame/Manager/ImGuiManager.h"
 #include "DirectXGame/Object/Model.h"
+#include "EnemyBullet.h"
 #include "DirectXGame/GameObject/Entity/Enemy/State/BaseEnemyState.h"
 #include "DirectXGame/GameObject/Entity/Enemy/State/EnemyStateApproach.h"
 #include "DirectXGame/GameObject/Entity/Enemy/State/EnemyStateLeave.h"
@@ -26,6 +27,8 @@ public:
 
 	void Draw();
 
+	void PopBullet();
+
 private:
 
 	void Approach();
@@ -38,6 +41,7 @@ public: //ゲッターセッター
 	inline void SetPos(Vector3 pos) { modelinfo_.worldTransform_.data_.translate_ = pos; }
 	inline void MovePos(Vector3 pos) { modelinfo_.worldTransform_.data_.translate_ += pos; }
 	inline void ChangePhase(BaseEnemyState* enemyState) { baseEnemyState_.reset(enemyState); }
+	inline void SetBulletCoolDown(int coolDown) { bulletCoolDown_ = coolDown; }
 
 private:
 	InputManager* input_;
@@ -48,6 +52,10 @@ private:
 	std::unique_ptr<Model> model_;
 	RenderItem modelinfo_;
 	uint32_t enemyTexture_;
+
+	//弾
+	std::list<std::unique_ptr<EnemyBullet>> bullets_;
+	int bulletCoolDown_;
 
 	//フェーズ
 	std::unique_ptr<BaseEnemyState> baseEnemyState_;

@@ -8,7 +8,5 @@ public:
     void Update(Enemy* enemy_) override;
 
 private:
-
-
 };
 

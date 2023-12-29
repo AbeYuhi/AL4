@@ -94,13 +94,6 @@ void Sprite::TransferVertices() {
 	vertexData_[2].position = { right, bot, 0.0f, 1.0f }; //右下
 	vertexData_[3].position = { right, top, 0.0f, 1.0f }; //右上
 
-	D3D12_RESOURCE_DESC resDesc = TextureManager::GetInstance()->GetTextureDesc(textureHandle_);
-
-	/*float uvLeft = (0.0f - baseUvPos_.x);
-	float uvRight = (1.0f - baseUvPos_.x);
-	float uvTop = (0.0f - baseUvPos_.y);
-	float uvBot = (1.0f - baseUvPos_.y);*/
-
 	float uvLeft = baseUvPos_.x;
 	float uvRight = baseUvPos_.x + texSize_.x;
 	float uvTop = baseUvPos_.y;
