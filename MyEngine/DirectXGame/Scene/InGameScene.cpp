@@ -47,6 +47,7 @@ void InGameScene::Initialize() {
 
 	enemy_ = std::make_unique<Enemy>();
 	enemy_->Initialize();
+	enemy_->SetPlayer(player_.get());
 }
 
 void InGameScene::Update() {
@@ -70,6 +71,52 @@ void InGameScene::Update() {
 
 	player_->Update();
 	enemy_->Update();
+
+	//当たり判定
+	Vector3 posA, posB;
+	const std::list<std::unique_ptr<PlayerBullet>>& playerBullets = player_->GetBullets();
+	const std::list<std::unique_ptr<EnemyBullet>>& enemyBullets = enemy_->GetBullets();
+
+#pragma region 自キャラと敵弾の当たり判定
+	posA = player_->GetWorldPos();
+	for (auto& enemyBullet : enemyBullets) {
+		posB = enemyBullet->GetWorldPos();
+
+		float length = Length(posA - posB);
+		if (length <= 2.0f) {
+			player_->OnCollision();
+			enemyBullet->OnCollision();
+		}
+	}
+#pragma endregion
+
+#pragma region 自弾と敵キャラの当たり判定
+	posA = enemy_->GetWorldPos();
+	for (auto& playerBullet : playerBullets) {
+		posB = playerBullet->GetWorldPos();
+
+		float length = Length(posA - posB);
+		if (length <= 2.0f) {
+			enemy_->OnCollision();
+			playerBullet->OnCollision();
+		}
+	}
+#pragma endregion
+
+#pragma region 自弾と敵弾の当たり判定
+	for (auto& playerBullet : playerBullets) {
+		posA = playerBullet->GetWorldPos();
+		for (auto& enemyBullet : enemyBullets) {
+			posB = enemyBullet->GetWorldPos();
+
+			float length = Length(posA - posB);
+			if (length <= 2.0f) {
+				playerBullet->OnCollision();
+				enemyBullet->OnCollision();
+			}
+		}
+	}
+#pragma endregion
 
 	ImGui::Begin("BlendMode");
 	const char* modes[] = { "None", "Normal", "Add", "SubTract", "MultiPly", "Screen"};

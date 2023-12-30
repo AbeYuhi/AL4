@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "DirectXGame/GameObject/Entity/Player/Player.h"
 
 Enemy::Enemy(){}
 Enemy::~Enemy(){}
@@ -52,15 +53,25 @@ void Enemy::Draw(){
 
 void Enemy::PopBullet() {
 	if (bulletCoolDown_ <= 0) {
-		Vector3 velocity = { 0, 0, -1.0f };
-		velocity = TransformNormal(velocity, modelinfo_.worldTransform_.worldMatrix_);
+		const float bulletSpeed = 1.0f;
+
+		Vector3 playerWorldPos = player_->GetWorldPos();
+		Vector3 enemyWorldPos = modelinfo_.worldTransform_.GetWorldPos();
+		Vector3 vector = playerWorldPos - enemyWorldPos;
+		vector = Normalize(vector);
+		vector *= bulletSpeed;
+
 
 		std::unique_ptr<EnemyBullet> bullet = std::make_unique<EnemyBullet>();
-		bullet->Initialize(modelinfo_.worldTransform_.data_.translate_, velocity);
+		bullet->Initialize(modelinfo_.worldTransform_.data_.translate_, vector);
 		bullets_.push_back(std::move(bullet));
 		bulletCoolDown_ = 60;
 	}
 	else {
 		bulletCoolDown_--;
 	}
+}
+
+void Enemy::OnCollision() {
+
 }

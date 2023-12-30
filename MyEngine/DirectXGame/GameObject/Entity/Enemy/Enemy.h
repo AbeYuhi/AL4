@@ -16,6 +16,8 @@ enum class Phase {
 	LEAVE,
 };
 
+class Player;
+
 class Enemy
 {
 public:
@@ -29,19 +31,18 @@ public:
 
 	void PopBullet();
 
-private:
-
-	void Approach();
-
-	void Leave();
+	void OnCollision();
 
 public: //ゲッターセッター
 
 	inline Vector3 GetPos() { return modelinfo_.worldTransform_.data_.translate_; }
+	inline Vector3 GetWorldPos() { return modelinfo_.worldTransform_.GetWorldPos(); }
 	inline void SetPos(Vector3 pos) { modelinfo_.worldTransform_.data_.translate_ = pos; }
 	inline void MovePos(Vector3 pos) { modelinfo_.worldTransform_.data_.translate_ += pos; }
 	inline void ChangePhase(BaseEnemyState* enemyState) { baseEnemyState_.reset(enemyState); }
 	inline void SetBulletCoolDown(int coolDown) { bulletCoolDown_ = coolDown; }
+	inline void SetPlayer(Player* player) { player_ = player; }
+	inline const std::list<std::unique_ptr<EnemyBullet>>& GetBullets() const { return bullets_; }
 
 private:
 	InputManager* input_;
@@ -59,5 +60,7 @@ private:
 
 	//フェーズ
 	std::unique_ptr<BaseEnemyState> baseEnemyState_;
+
+	Player* player_;
 };
 

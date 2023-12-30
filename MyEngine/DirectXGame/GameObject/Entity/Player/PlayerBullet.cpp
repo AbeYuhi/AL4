@@ -34,3 +34,7 @@ void PlayerBullet::Update(){
 void PlayerBullet::Draw(){
 	model_->Draw(modelinfo_, blackTexture_);
 }
+
+void PlayerBullet::OnCollision() {
+	isDead_ = true;
+}

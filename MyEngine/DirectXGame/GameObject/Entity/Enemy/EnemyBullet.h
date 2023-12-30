@@ -19,7 +19,10 @@ public:
 
 	void Draw();
 
+	void OnCollision();
+
 	inline bool GetIsDead() { return isDead_; }
+	inline Vector3 GetWorldPos() { return modelinfo_.worldTransform_.GetWorldPos(); }
 
 private:
 	InputManager* input_;

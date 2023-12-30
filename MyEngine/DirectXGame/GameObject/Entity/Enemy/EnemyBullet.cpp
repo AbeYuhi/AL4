@@ -35,3 +35,7 @@ void EnemyBullet::Update() {
 void EnemyBullet::Draw() {
 	model_->Draw(modelinfo_, bulletTexture_);
 }
+
+void EnemyBullet::OnCollision() {
+	isDead_ = true;
+}

@@ -91,3 +91,7 @@ void Player::Attack() {
 		itBullet++;
 	}
 }
+
+void Player::OnCollision() {
+
+}
