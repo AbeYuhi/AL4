@@ -48,6 +48,9 @@ void InGameScene::Initialize() {
 	enemy_ = std::make_unique<Enemy>();
 	enemy_->Initialize();
 	enemy_->SetPlayer(player_.get());
+
+	skydome_ = std::make_unique<Skydome>();
+	skydome_->Initialize();
 }
 
 void InGameScene::Update() {
@@ -71,6 +74,7 @@ void InGameScene::Update() {
 
 	player_->Update();
 	enemy_->Update();
+	skydome_->Update();
 
 	//当たり判定
 	Vector3 posA, posB;
@@ -133,7 +137,6 @@ void InGameScene::Draw() {
 
 	///背景スプライトの描画開始
 
-	
 
 	///背景スプライト描画終了
 	//深度バッファのクリア
@@ -149,6 +152,7 @@ void InGameScene::Draw() {
 
 	player_->Draw();
 	enemy_->Draw();
+	skydome_->Draw();
 
 	///オブジェクトの描画終了
 

@@ -115,6 +115,12 @@
     <Filter Include="ヘッダー ファイル\GameObject\Entity\Enemy\State">
       <UniqueIdentifier>{d9e5542f-fb50-4471-a25d-162c0e98413f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\GameObject\Skydome">
+      <UniqueIdentifier>{cafa2aae-a1b3-4bea-8611-8754da42f7bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\GameObject\Skydome">
+      <UniqueIdentifier>{8a69f4f8-cc8e-4841-9554-9a1832eb2ef4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -290,6 +296,9 @@
     </ClCompile>
     <ClCompile Include="DirectXGame\GameObject\Entity\Enemy\EnemyBullet.cpp">
       <Filter>ソース ファイル\GameObject\Entity\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXGame\GameObject\Skydome\Skydome.cpp">
+      <Filter>ソース ファイル\GameObject\Skydome</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -520,6 +529,9 @@
     </ClInclude>
     <ClInclude Include="DirectXGame\GameObject\Entity\Enemy\EnemyBullet.h">
       <Filter>ヘッダー ファイル\GameObject\Entity\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXGame\GameObject\Skydome\Skydome.h">
+      <Filter>ヘッダー ファイル\GameObject\Skydome</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

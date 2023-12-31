@@ -20,6 +20,7 @@
 #include "DirectXGame/GameObject/Particle/testParticle.h"
 #include "DirectXGame/GameObject/Entity/Player/Player.h"
 #include "DirectXGame/GameObject/Entity/Enemy/Enemy.h"
+#include "DirectXGame/GameObject/Skydome/Skydome.h"
 #include "DirectXGame/Scene/IScene.h"
 
 class InGameScene : public IScene {
@@ -57,5 +58,5 @@ private:
 
 	std::unique_ptr<Player> player_;
 	std::unique_ptr<Enemy> enemy_;
-
+	std::unique_ptr<Skydome> skydome_;
 };
