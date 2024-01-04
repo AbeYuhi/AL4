@@ -13,6 +13,8 @@ void Player::Initialize() {
 	modelinfo_.Initialize();
 	playerTexture_ = TextureManager::Load("dog.png");
 
+	modelinfo_.worldTransform_.data_.translate_.z = 50;
+
 	//バレット関連
 	bulletCooldown_ = 0;
 }
@@ -75,7 +77,7 @@ void Player::Attack() {
 		velocity = TransformNormal(velocity, modelinfo_.worldTransform_.worldMatrix_);
 
 		std::unique_ptr<PlayerBullet> bullet = std::make_unique<PlayerBullet>();
-		bullet->Initialize(modelinfo_.worldTransform_.data_.translate_, velocity);
+		bullet->Initialize(modelinfo_.worldTransform_.GetWorldPos(), velocity);
 		bullets_.push_back(std::move(bullet));
 	}
 

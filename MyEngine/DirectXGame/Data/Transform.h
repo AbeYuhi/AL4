@@ -27,8 +27,8 @@ struct WorldTransform {
 	Matrix4x4 worldMatrix_;
 	//Matrix転送済みデータ
 	TransformMatrix* matrix_;
-	//親のワールドポインタ
-	const WorldTransform* parent_ = nullptr;
+	//親のワールド行列ポインタ
+	const Matrix4x4* parent_ = nullptr;
 	//ビュープロジェクションのポインタ
 	const Matrix4x4* viewProjectionMatrix_ = nullptr;
 

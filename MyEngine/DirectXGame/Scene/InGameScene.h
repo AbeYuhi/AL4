@@ -15,6 +15,7 @@
 #include "DirectXGame/GameObject/Camera/MainCamera.h"
 #include "DirectXGame/GameObject/Camera/InGameCamera.h"
 #include "DirectXGame/GameObject/Camera/DebugCamera.h"
+#include "DirectXGame/GameObject/Camera/RailCamera.h"
 #include "DirectXGame/GameObject/Camera/SpriteCamera.h"
 #include "DirectXGame/GameObject/Light/LightObject.h"
 #include "DirectXGame/GameObject/Particle/testParticle.h"
@@ -50,6 +51,9 @@ private:
 	//デバッグカメラ
 	std::unique_ptr<DebugCamera> debugCamera_;
 	bool isDebugCamera_;
+	//レールカメラ
+	std::unique_ptr<RailCamera> railCamera_;
+
 	//ライト
 	std::unique_ptr<LightObject> lightObj_;
 

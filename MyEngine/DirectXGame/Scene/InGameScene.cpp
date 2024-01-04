@@ -31,6 +31,9 @@ void InGameScene::Initialize() {
 	//デバッグカメラ
 	debugCamera_ = std::make_unique<DebugCamera>();
 	debugCamera_->Initialize();
+	//レールカメラ
+	railCamera_ = std::make_unique<RailCamera>();
+	railCamera_->Initialize({0, 0, -10}, {0, 0, 0});
 
 	//スプライトカメラの初期化
 	spriteCamera_->Initialize();
@@ -44,6 +47,7 @@ void InGameScene::Initialize() {
 
 	player_ = std::make_unique<Player>();
 	player_->Initialize();
+	player_->SetParent(mainCamera_->GetPWorldMatrix());
 
 	enemy_ = std::make_unique<Enemy>();
 	enemy_->Initialize();
@@ -64,8 +68,9 @@ void InGameScene::Update() {
 		mainCamera_->Update(debugCamera_->GetWorldMatrix(), debugCamera_->GetProjectionMatrix());
 	}
 	else {
-		gameCamera_->Update();
-		mainCamera_->Update(gameCamera_->GetWorldMatrix(), gameCamera_->GetProjectionMatrix());
+		//gameCamera_->Update();
+		railCamera_->Update({0, 0, -1}, {0, 0, 0});
+		mainCamera_->Update(railCamera_->GetWorldMatrix(), railCamera_->GetProjectionMatrix());
 	}
 	//スプライトカメラの更新
 	spriteCamera_->Update();

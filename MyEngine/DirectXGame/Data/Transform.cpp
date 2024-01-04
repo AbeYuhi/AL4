@@ -36,7 +36,7 @@ void WorldTransform::RunMap() {
 void WorldTransform::UpdateWorld() { 
 	worldMatrix_ = MakeAffineMatrix(data_.scale_, data_.rotate_, data_.translate_);
 	if (parent_) {
-		worldMatrix_ = Multiply(worldMatrix_, parent_->worldMatrix_);
+		worldMatrix_ = Multiply(worldMatrix_, *parent_);
 	}
 
 	TransferMatrix();

@@ -300,6 +300,9 @@
     <ClCompile Include="DirectXGame\GameObject\Skydome\Skydome.cpp">
       <Filter>ソース ファイル\GameObject\Skydome</Filter>
     </ClCompile>
+    <ClCompile Include="DirectXGame\GameObject\Camera\RailCamera.cpp">
+      <Filter>ソース ファイル\GameObject\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectXGame\Object\Triangle.h">
@@ -532,6 +535,9 @@
     </ClInclude>
     <ClInclude Include="DirectXGame\GameObject\Skydome\Skydome.h">
       <Filter>ヘッダー ファイル\GameObject\Skydome</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXGame\GameObject\Camera\RailCamera.h">
+      <Filter>ヘッダー ファイル\GameObject\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

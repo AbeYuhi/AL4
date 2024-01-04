@@ -21,6 +21,7 @@ public:
 	void Draw();
 
 	Matrix4x4 GetWorldMatrix() { return worldMatrix_; }
+	Matrix4x4* GetPWorldMatrix() { return &worldMatrix_; }
 	Matrix4x4 GetViewProjectionMatrix() { return viewProjectionMatrix_; }
 	Matrix4x4* GetPViewProjectionMatrix() { return &viewProjectionMatrix_; }
 
