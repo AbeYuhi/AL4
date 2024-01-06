@@ -6,7 +6,9 @@
 #include "DirectXGame/Manager/InputManager.h"
 #include "DirectXGame/Manager/ImGuiManager.h"
 #include "DirectXGame/Object/Model.h"
+#include "DirectXGame/Object/Sprite.h"
 #include "DirectXGame/GameObject/Entity/Player/PlayerBullet.h"
+#include "DirectXGame/GameObject/Camera/MainCamera.h"
 
 class Player
 {
@@ -19,6 +21,8 @@ public:
 	void Update();
 
 	void Draw();
+
+	void DrawUI();
 
 	void OnCollision();
 
@@ -43,5 +47,12 @@ private:
 	//バレット
 	std::list<std::unique_ptr<PlayerBullet>> bullets_;
 	int32_t bulletCooldown_;
+
+
+	//レティクル
+	RenderItem info2DReticle_;
+	RenderItem info3DReticle_;
+	std::unique_ptr<Sprite> sprite2DReticle_ = nullptr;
+	uint32_t reticleTexture_;
 };
 

@@ -1,4 +1,5 @@
 #pragma once
+#include <sstream>
 #include "DirectXGame/Base/WinApp/WinApp.h"
 #include "DirectXGame/Base/DirectXCommon/DirectXCommon.h"
 #include "DirectXGame/Manager/ImGuiManager.h"
@@ -37,6 +38,14 @@ public:
 
 	void Finalize() override;
 
+	void AddBulletEnemy(std::unique_ptr<EnemyBullet> enemyBullet);
+
+	void PopEnemy(Vector3 enemyPos);
+
+	void LoadEnemyPopData();
+
+	void UpdateEnemyPopCommands();
+
 private:
 	//基本機能
 	WinApp* winApp_;
@@ -61,6 +70,14 @@ private:
 	int blendMode_;
 
 	std::unique_ptr<Player> player_;
-	std::unique_ptr<Enemy> enemy_;
+	std::list < std::unique_ptr<Enemy>> enemys_;
+
+	std::stringstream enemyPopCommands_;
+	bool isWait_;
+	int waitTime_;
+	//弾
+	std::list<std::unique_ptr<EnemyBullet>> enemyBullets_;
+
+
 	std::unique_ptr<Skydome> skydome_;
 };

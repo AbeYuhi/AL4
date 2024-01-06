@@ -17,6 +17,7 @@ enum class Phase {
 };
 
 class Player;
+class InGameScene;
 
 class Enemy
 {
@@ -29,9 +30,9 @@ public:
 
 	void Draw();
 
-	void PopBullet();
-
 	void OnCollision();
+
+	void PopBullet();
 
 public: //ゲッターセッター
 
@@ -41,8 +42,11 @@ public: //ゲッターセッター
 	inline void MovePos(Vector3 pos) { modelinfo_.worldTransform_.data_.translate_ += pos; }
 	inline void ChangePhase(BaseEnemyState* enemyState) { baseEnemyState_.reset(enemyState); }
 	inline void SetBulletCoolDown(int coolDown) { bulletCoolDown_ = coolDown; }
+	inline int GetBulletCoolDown() { return bulletCoolDown_; }
+	inline bool GetIsDead() { return isDead_; }
+	inline void SetIsDead(bool isDead) { isDead_ = isDead; }
 	inline void SetPlayer(Player* player) { player_ = player; }
-	inline const std::list<std::unique_ptr<EnemyBullet>>& GetBullets() const { return bullets_; }
+	inline void SetGameScene(InGameScene* gameScene) { gameScene_ = gameScene; }
 
 private:
 	InputManager* input_;
@@ -54,13 +58,15 @@ private:
 	RenderItem modelinfo_;
 	uint32_t enemyTexture_;
 
-	//弾
-	std::list<std::unique_ptr<EnemyBullet>> bullets_;
-	int bulletCoolDown_;
-
 	//フェーズ
 	std::unique_ptr<BaseEnemyState> baseEnemyState_;
 
+	//球のクールダウン
+	int bulletCoolDown_;
+
+	bool isDead_;
+
 	Player* player_;
+	InGameScene* gameScene_;
 };
 
