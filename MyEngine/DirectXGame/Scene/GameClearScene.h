@@ -1,5 +1,6 @@
 #pragma once
 #include "IScene.h"
+#include "DirectXGame/Manager/InputManager.h"
 
 class GameClearScene : public IScene
 {
@@ -15,5 +16,6 @@ public:
 
 	void Finalize() override;
 private:
+	InputManager* input_;
 
 };

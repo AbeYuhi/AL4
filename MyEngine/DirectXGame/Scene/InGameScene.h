@@ -78,6 +78,7 @@ private:
 	//弾
 	std::list<std::unique_ptr<EnemyBullet>> enemyBullets_;
 
+	bool isEnd_;
 
 	std::unique_ptr<Skydome> skydome_;
 };

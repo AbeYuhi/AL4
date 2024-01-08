@@ -14,6 +14,9 @@ void GameOverScene::Initialize() {
 }
 
 void GameOverScene::Update() {
+	if (input_->IsTriggerGamePadbutton(XINPUT_GAMEPAD_A)) {
+		sceneNo_ = TITLE;
+	}
 
 }
 

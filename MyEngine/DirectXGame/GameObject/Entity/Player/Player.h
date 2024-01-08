@@ -29,6 +29,8 @@ public:
 	inline Vector3 GetWorldPos() { return modelinfo_.worldTransform_.GetWorldPos(); }
 	inline const std::list<std::unique_ptr<PlayerBullet>>& GetBullets() const { return bullets_; }
 	inline void SetParent(const Matrix4x4* parent) { modelinfo_.worldTransform_.parent_ = parent; }
+	inline bool IsDead() { return isDead_; }
+	inline int GetHp() { return hp_; }
 
 private:
 
@@ -48,6 +50,8 @@ private:
 	std::list<std::unique_ptr<PlayerBullet>> bullets_;
 	int32_t bulletCooldown_;
 
+	int hp_;
+	bool isDead_;
 
 	//レティクル
 	RenderItem info2DReticle_;

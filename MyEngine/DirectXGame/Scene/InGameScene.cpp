@@ -55,6 +55,7 @@ void InGameScene::Initialize() {
 	LoadEnemyPopData();
 
 	isWait_ = false;
+	isEnd_ = false;
 }
 
 void InGameScene::Update() {
@@ -155,10 +156,19 @@ void InGameScene::Update() {
 	}
 #pragma endregion
 
+	if (player_->IsDead()) {
+		sceneNo_ = GAMEOVER;
+	}
+
 	ImGui::Begin("BlendMode");
 	const char* modes[] = { "None", "Normal", "Add", "SubTract", "MultiPly", "Screen"};
 	ImGui::Combo("blendMode", &blendMode_, modes, IM_ARRAYSIZE(modes));
 	GraphicsPipelineManager::GetInstance()->SetBlendMode(static_cast<BlendMode>(blendMode_));
+	ImGui::End();
+
+	ImGui::Begin("Test");
+	ImGui::Text("isEnd : %d", isEnd_);
+	ImGui::Text("hp : %d", player_->GetHp());
 	ImGui::End();
 }
 
@@ -234,6 +244,9 @@ void InGameScene::UpdateEnemyPopCommands() {
 		waitTime_--;
 		if (waitTime_ < 0) {
 			isWait_ = false;
+			if (isEnd_) {
+				sceneNo_ = GAMECLEAR;
+			}
 		}
 		return;
 	}
@@ -279,6 +292,21 @@ void InGameScene::UpdateEnemyPopCommands() {
 			//待機開始
 			isWait_ = true;
 			waitTime_ = waitTime;
+
+			//コマンドループを抜ける
+			break;
+		}
+
+		if (word.find("END") == 0) {
+			getline(line_stream, word, ',');
+
+			//待ち時間
+			int32_t waitTime = atoi(word.c_str());
+
+			//待機開始
+			isWait_ = true;
+			waitTime_ = waitTime;
+			isEnd_ = true;
 
 			//コマンドループを抜ける
 			break;

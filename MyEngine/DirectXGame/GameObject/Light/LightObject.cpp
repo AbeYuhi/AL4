@@ -10,7 +10,7 @@ void LightObject::Initialize() {
 	lightResource_->Map(0, nullptr, reinterpret_cast<void**>(&lightData_));
 
 	for (int index = 0; index < kDirectionLightNum; index++) {
-		lightData_->directionalLight[index].type = 0;
+		lightData_->directionalLight[index].type = 2;
 		lightData_->directionalLight[index].color = { 1.0f, 1.0f, 1.0f, 1.0f };
 		lightData_->directionalLight[index].direction = { 0.0f, -1.0f, 0.0f };
 		lightData_->directionalLight[index].intensity = 1.0f;

@@ -9,19 +9,27 @@ void Player::Initialize() {
 	randomManager_ = RandomManager::GetInstance();
 	
 	//テクスチャの読み込み
-	model_ = Model::Create();
+	model_ = Model::Create("Sphere");
 	modelinfo_.Initialize();
-	playerTexture_ = TextureManager::Load("dog.png");
+	playerTexture_ = TextureManager::Load();
 	reticleTexture_ = TextureManager::Load("Reticle.png");
 
 	modelinfo_.worldTransform_.data_.translate_.z = 40;
+	modelinfo_.materialInfo_.material_->enableLightint = true;
 
 	//バレット関連
 	bulletCooldown_ = 0;
 
+	hp_ = 5;
+	isDead_ = false;
+
 	//スプライト生成
 	sprite2DReticle_ = Sprite::Create({ 64, 64 }, reticleTexture_, { 0.5, 0.5 });
+
 	info2DReticle_.Initialize(true);
+	info2DReticle_.worldTransform_.data_.translate_ = {640, 360, 0};
+	info2DReticle_.Update();
+
 	info3DReticle_.Initialize(true);
 }
 
@@ -43,6 +51,12 @@ void Player::Update() {
 	}
 	if (input_->IsPushKey(DIK_S)) {
 		move.y -= 0.2f;
+	}
+
+	if (input_->GetGamePadLStick().x != 0 || input_->GetGamePadLStick().y != 0) {
+		move.x = input_->GetGamePadLStick().x * 0.2f;
+		move.y = input_->GetGamePadLStick().y * 0.2f;
+		move.z = 0;
 	}
 
 	Vector3 rotate = { 0, 0, 0 };
@@ -67,6 +81,7 @@ void Player::Update() {
 
 	modelinfo_.Update();
 
+
 	//マウスの場合
 	//POINT mousePosition;
 	////マウス座標(スクリーン座標)を取得
@@ -77,11 +92,11 @@ void Player::Update() {
 	//sprite2DReticle_->SetPosition(Vector2((float)mousePosition.x, (float)mousePosition.y));
 
 	//ゲームパッド
-	Vector3 spritePosition = { info2DReticle_.worldTransform_.GetWorldPos().x,  info2DReticle_.worldTransform_.GetWorldPos().y, 0 };
+	Vector3 spritePosition = { info2DReticle_.worldTransform_.GetWorldPos().x,  info2DReticle_.worldTransform_.GetWorldPos().y, 100 };
 
 	//ジョイスティック取得状態
-	spritePosition.x += input_->GetGamePadLStick().x * 10.0f;
-	spritePosition.y -= input_->GetGamePadLStick().y * 10.0f;
+	spritePosition.x += input_->GetGamePadRStick().x * 15.0f;
+	spritePosition.y -= input_->GetGamePadRStick().y * 15.0f;
 
 	info2DReticle_.worldTransform_.data_.translate_ = spritePosition;
 	info2DReticle_.Update();
@@ -145,5 +160,9 @@ void Player::Attack() {
 }
 
 void Player::OnCollision() {
+	hp_--;
 
+	if (hp_ <= 0) {
+		isDead_ = true;
+	}
 }
