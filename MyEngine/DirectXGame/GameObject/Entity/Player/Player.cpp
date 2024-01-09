@@ -117,7 +117,7 @@ void Player::Update() {
 	Vector3 mouseDirection = posFar - posNear;
 	mouseDirection = Normalize(mouseDirection);
 	//カメラから照準オブジェクトの距離
-	const float kDistanceTestObject = 100;
+	const float kDistanceTestObject = 70;
 	info3DReticle_.worldTransform_.data_.translate_ = posNear + (mouseDirection * kDistanceTestObject);
 	info3DReticle_.Update();
 }
@@ -136,7 +136,11 @@ void Player::DrawUI() {
 void Player::Attack() {
 	const float kBulletSpeed = 1.0f;
 
-	if (input_->IsPushGamePadRTrigger()) {
+	if (bulletCooldown_ > 0) {
+		bulletCooldown_--;
+	}
+
+	if (input_->IsPushGamePadRTrigger() && bulletCooldown_ <= 0) {
 		Vector3 velocity = info3DReticle_.worldTransform_.GetWorldPos() - modelinfo_.worldTransform_.GetWorldPos();
 		velocity = Normalize(velocity);
 		velocity *= kBulletSpeed;
@@ -144,6 +148,8 @@ void Player::Attack() {
 		std::unique_ptr<PlayerBullet> bullet = std::make_unique<PlayerBullet>();
 		bullet->Initialize(modelinfo_.worldTransform_.GetWorldPos(), velocity);
 		bullets_.push_back(std::move(bullet));
+
+		bulletCooldown_ = 15;
 	}
 
 	for (auto itBullet = bullets_.begin(); itBullet != bullets_.end();) {

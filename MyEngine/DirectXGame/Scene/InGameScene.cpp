@@ -70,7 +70,7 @@ void InGameScene::Update() {
 	}
 	else {
 		//gameCamera_->Update();
-		railCamera_->Update({0, 0, -1}, {0, 0, 0});
+		railCamera_->Update({0, 0, 0}, {0, 0, 0});
 		mainCamera_->Update(railCamera_->GetWorldMatrix(), railCamera_->GetProjectionMatrix());
 	}
 	//スプライトカメラの更新

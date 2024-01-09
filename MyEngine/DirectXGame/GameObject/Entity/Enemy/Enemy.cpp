@@ -18,6 +18,7 @@ void Enemy::Initialize(){
 
 	bulletCoolDown_ = 0;
 	isDead_ = false;
+	deadTimer_ = 900;
 
 	//テクスチャ
 	enemyTexture_ = TextureManager::Load();
@@ -30,9 +31,11 @@ void Enemy::Update(){
 
 	baseEnemyState_->Update(this);
 
+	deadTimer_--;
+
 	modelinfo_.Update();
 
-	if (modelinfo_.worldTransform_.GetWorldPos().z <= -10) {
+	if (modelinfo_.worldTransform_.GetWorldPos().z <= -10 || deadTimer_ <= 0) {
 		isDead_ = true;
 	}
 

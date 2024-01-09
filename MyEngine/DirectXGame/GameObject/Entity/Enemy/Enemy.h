@@ -65,6 +65,7 @@ private:
 	int bulletCoolDown_;
 
 	bool isDead_;
+	int deadTimer_;
 
 	Player* player_;
 	InGameScene* gameScene_;
