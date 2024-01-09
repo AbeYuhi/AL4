@@ -92,7 +92,7 @@ void Player::Update() {
 	//sprite2DReticle_->SetPosition(Vector2((float)mousePosition.x, (float)mousePosition.y));
 
 	//ゲームパッド
-	Vector3 spritePosition = { info2DReticle_.worldTransform_.GetWorldPos().x,  info2DReticle_.worldTransform_.GetWorldPos().y, 100 };
+	Vector3 spritePosition = { info2DReticle_.worldTransform_.GetWorldPos().x,  info2DReticle_.worldTransform_.GetWorldPos().y, 0 };
 
 	//ジョイスティック取得状態
 	spritePosition.x += input_->GetGamePadRStick().x * 15.0f;
@@ -117,7 +117,7 @@ void Player::Update() {
 	Vector3 mouseDirection = posFar - posNear;
 	mouseDirection = Normalize(mouseDirection);
 	//カメラから照準オブジェクトの距離
-	const float kDistanceTestObject = 50;
+	const float kDistanceTestObject = 100;
 	info3DReticle_.worldTransform_.data_.translate_ = posNear + (mouseDirection * kDistanceTestObject);
 	info3DReticle_.Update();
 }

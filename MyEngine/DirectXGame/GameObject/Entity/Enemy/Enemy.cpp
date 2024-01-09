@@ -20,7 +20,8 @@ void Enemy::Initialize(){
 	isDead_ = false;
 
 	//テクスチャ
-	enemyTexture_ = TextureManager::Load("Slime.png");
+	enemyTexture_ = TextureManager::Load();
+	modelinfo_.materialInfo_.material_->color = {0, 0, 0, 1};
 
 	baseEnemyState_.reset(new EnemyStateApproach());
 }

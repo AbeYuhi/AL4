@@ -12,7 +12,8 @@ void PlayerBullet::Initialize(Vector3 pos, Vector3 velocity){
 	model_ = Model::Create();
 	modelinfo_.Initialize();
 	modelinfo_.worldTransform_.data_.translate_ = pos;
-	blackTexture_ = TextureManager::Load("black2x2.png");
+	modelinfo_.materialInfo_.material_->color = { 1, 1, 1, 1 };
+	blackTexture_ = TextureManager::Load();
 
 	deadCount_ = 120;
 	isDead_ = false;
