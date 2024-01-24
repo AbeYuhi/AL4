@@ -8,9 +8,10 @@
 #include "DirectXGame/Object/Model.h"
 #include "DirectXGame/Object/Sprite.h"
 #include "DirectXGame/GameObject/Entity/Player/PlayerBullet.h"
+#include "DirectXGame/GameObject/Entity/Collider/Collider.h"
 #include "DirectXGame/GameObject/Camera/MainCamera.h"
 
-class Player
+class Player : public Collider
 {
 public:
 	Player();

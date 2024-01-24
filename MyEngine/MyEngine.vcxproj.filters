@@ -127,6 +127,12 @@
     <Filter Include="ヘッダー ファイル\Sytem">
       <UniqueIdentifier>{b3c6c45d-0f4f-4629-8a53-0bc0a31ca560}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\GameObject\Entity\Collider">
+      <UniqueIdentifier>{ce9df8e0-6898-42d6-b418-04a57cba0bf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\GameObject\Entity\Collider">
+      <UniqueIdentifier>{ce22a114-b17b-44a3-8e0b-ec8926ce5d12}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -311,6 +317,9 @@
     </ClCompile>
     <ClCompile Include="DirectXGame\Sytem\TimeCall.cpp">
       <Filter>ソース ファイル\Sytem</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXGame\GameObject\Entity\Collider\Collider.cpp">
+      <Filter>ソース ファイル\GameObject\Entity\Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -550,6 +559,9 @@
     </ClInclude>
     <ClInclude Include="DirectXGame\Sytem\TimeCall.h">
       <Filter>ヘッダー ファイル\Sytem</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXGame\GameObject\Entity\Collider\Collider.h">
+      <Filter>ヘッダー ファイル\GameObject\Entity\Collider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

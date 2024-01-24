@@ -46,6 +46,8 @@ public:
 
 	void UpdateEnemyPopCommands();
 
+	void CheckCollisionPair(Collider* colliderA, Collider* colliderB);
+
 private:
 	//基本機能
 	WinApp* winApp_;

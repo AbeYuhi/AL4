@@ -107,34 +107,19 @@ void InGameScene::Update() {
 	skydome_->Update();
 
 	//当たり判定
-	Vector3 posA, posB;
 	const std::list<std::unique_ptr<PlayerBullet>>& playerBullets = player_->GetBullets();
 	const std::list<std::unique_ptr<EnemyBullet>>& enemyBullets = enemyBullets_;
 
 #pragma region 自キャラと敵弾の当たり判定
-	posA = player_->GetWorldPos();
 	for (auto& enemyBullet : enemyBullets) {
-		posB = enemyBullet->GetWorldPos();
-
-		float length = Length(posA - posB);
-		if (length <= 2.0f) {
-			player_->OnCollision();
-			enemyBullet->OnCollision();
-		}
+		CheckCollisionPair(player_.get(), enemyBullet.get());
 	}
 #pragma endregion
 
 #pragma region 自弾と敵キャラの当たり判定
 	for (auto& enemy : enemys_) {
-		posA = enemy->GetWorldPos();
 		for (auto& playerBullet : playerBullets) {
-			posB = playerBullet->GetWorldPos();
-
-			float length = Length(posA - posB);
-			if (length <= 2.0f) {
-				enemy->OnCollision();
-				playerBullet->OnCollision();
-			}
+			CheckCollisionPair(enemy.get(), playerBullet.get());
 		}
 	}
 
@@ -142,15 +127,8 @@ void InGameScene::Update() {
 
 #pragma region 自弾と敵弾の当たり判定
 	for (auto& playerBullet : playerBullets) {
-		posA = playerBullet->GetWorldPos();
 		for (auto& enemyBullet : enemyBullets) {
-			posB = enemyBullet->GetWorldPos();
-
-			float length = Length(posA - posB);
-			if (length <= 2.0f) {
-				playerBullet->OnCollision();
-				enemyBullet->OnCollision();
-			}
+			CheckCollisionPair(playerBullet.get(), enemyBullet.get());
 		}
 	}
 #pragma endregion
@@ -283,5 +261,16 @@ void InGameScene::UpdateEnemyPopCommands() {
 			//コマンドループを抜ける
 			break;
 		}
+	}
+}
+
+void InGameScene::CheckCollisionPair(Collider* colliderA, Collider* colliderB) {
+	Vector3 posA = colliderA->GetWorldPos();
+	Vector3 posB = colliderB->GetWorldPos();
+	float length = Length(posA, posB);
+	//交差判定
+	if (length <= colliderA->GetRadius() + colliderB->GetRadius()) {
+		colliderA->OnCollision();
+		colliderB->OnCollision();
 	}
 }

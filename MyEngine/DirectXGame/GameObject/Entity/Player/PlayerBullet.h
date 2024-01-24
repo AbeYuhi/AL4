@@ -6,8 +6,9 @@
 #include "DirectXGame/Manager/InputManager.h"
 #include "DirectXGame/Manager/ImGuiManager.h"
 #include "DirectXGame/Object/Model.h"
+#include "DirectXGame/GameObject/Entity/Collider/Collider.h"
 
-class PlayerBullet
+class PlayerBullet : public Collider
 {
 public:
 	PlayerBullet();

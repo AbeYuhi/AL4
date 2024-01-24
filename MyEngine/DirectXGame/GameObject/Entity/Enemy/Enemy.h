@@ -10,6 +10,7 @@
 #include "DirectXGame/GameObject/Entity/Enemy/State/BaseEnemyState.h"
 #include "DirectXGame/GameObject/Entity/Enemy/State/EnemyStateApproach.h"
 #include "DirectXGame/GameObject/Entity/Enemy/State/EnemyStateLeave.h"
+#include "DirectXGame/GameObject/Entity/Collider/Collider.h"
 #include "DirectXGame/Sytem/TimeCall.h"
 
 enum class Phase {
@@ -20,7 +21,7 @@ enum class Phase {
 class Player;
 class InGameScene;
 
-class Enemy
+class Enemy : public Collider
 {
 public:
 	Enemy();

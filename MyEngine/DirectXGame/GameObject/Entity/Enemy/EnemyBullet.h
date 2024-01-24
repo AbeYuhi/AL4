@@ -5,11 +5,12 @@
 #include "DirectXGame/Manager/RandomManager.h"
 #include "DirectXGame/Manager/InputManager.h"
 #include "DirectXGame/Manager/ImGuiManager.h"
+#include "DirectXGame/GameObject/Entity/Collider/Collider.h"
 #include "DirectXGame/Object/Model.h"
 
 class Player;
 
-class EnemyBullet
+class EnemyBullet : public Collider
 {
 public:
 	EnemyBullet();
