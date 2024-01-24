@@ -107,31 +107,38 @@ void InGameScene::Update() {
 	skydome_->Update();
 
 	//当たり判定
+	std::list<Collider*> colliders_;
 	const std::list<std::unique_ptr<PlayerBullet>>& playerBullets = player_->GetBullets();
 	const std::list<std::unique_ptr<EnemyBullet>>& enemyBullets = enemyBullets_;
 
-#pragma region 自キャラと敵弾の当たり判定
-	for (auto& enemyBullet : enemyBullets) {
-		CheckCollisionPair(player_.get(), enemyBullet.get());
-	}
-#pragma endregion
-
-#pragma region 自弾と敵キャラの当たり判定
+	//コライダーをリストに登録
+	colliders_.push_back(player_.get());
 	for (auto& enemy : enemys_) {
-		for (auto& playerBullet : playerBullets) {
-			CheckCollisionPair(enemy.get(), playerBullet.get());
-		}
+		colliders_.push_back(enemy.get());
 	}
 
-#pragma endregion
+	for (auto& enemyBullet : enemyBullets) {
+		colliders_.push_back(enemyBullet.get());
+	}
 
-#pragma region 自弾と敵弾の当たり判定
 	for (auto& playerBullet : playerBullets) {
-		for (auto& enemyBullet : enemyBullets) {
-			CheckCollisionPair(playerBullet.get(), enemyBullet.get());
+		colliders_.push_back(playerBullet.get());
+	}
+
+	//リストのペアを総当たり
+	for (auto itrA = colliders_.begin(); itrA != colliders_.end(); itrA++) {
+		auto colliderA = *itrA;
+
+		//イテレーターBはイテレーターAの次の要素から回す
+		std::list<Collider*>::iterator itrB = itrA;
+		itrB++;
+		for (; itrB != colliders_.end(); ++itrB) {
+			auto colliderB = *itrB;
+
+			//ペアの当たり判定
+			CheckCollisionPair(colliderA, colliderB);
 		}
 	}
-#pragma endregion
 
 	ImGui::Begin("BlendMode");
 	const char* modes[] = { "None", "Normal", "Add", "SubTract", "MultiPly", "Screen"};
@@ -265,6 +272,11 @@ void InGameScene::UpdateEnemyPopCommands() {
 }
 
 void InGameScene::CheckCollisionPair(Collider* colliderA, Collider* colliderB) {
+
+	if ((colliderA->GetCollisionAttribute() & colliderB->GetCollisionMask()) == 0 || (colliderA->GetCollisionMask() & colliderB->GetCollisionAttribute()) == 0) {
+		return;
+	}
+
 	Vector3 posA = colliderA->GetWorldPos();
 	Vector3 posB = colliderB->GetWorldPos();
 	float length = Length(posA, posB);

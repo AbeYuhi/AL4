@@ -18,6 +18,10 @@ void PlayerBullet::Initialize(Vector3 pos, Vector3 velocity){
 	isDead_ = false;
 	
 	velocity_ = velocity;
+
+	//衝突属性を設定
+	SetCollisionAttribute(kCollisionAttributePlayer);
+	SetCollisionMask(~kCollisionAttributePlayer);
 }
 
 void PlayerBullet::Update(){

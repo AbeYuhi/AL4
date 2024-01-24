@@ -22,7 +22,13 @@ void Player::Initialize() {
 	//スプライト生成
 	sprite2DReticle_ = Sprite::Create({ 64, 64 }, reticleTexture_, { 0.5, 0.5 });
 	info2DReticle_.Initialize(true);
+	info2DReticle_.worldTransform_.data_.translate_ = {640, 360};
+	info2DReticle_.Update();
 	info3DReticle_.Initialize(true);
+
+	//衝突属性を設定
+	SetCollisionAttribute(kCollisionAttributePlayer);
+	SetCollisionMask(~kCollisionAttributePlayer);
 }
 
 void Player::Update() {
@@ -53,9 +59,6 @@ void Player::Update() {
 		rotate.y += 0.03f;
 	}
 
-	modelinfo_.worldTransform_.data_.translate_ += move;
-	modelinfo_.worldTransform_.data_.rotate_ += rotate;
-
 	if (modelinfo_.worldTransform_.data_.translate_.x <= -30 || modelinfo_.worldTransform_.data_.translate_.x >= 30) {
 		modelinfo_.worldTransform_.data_.translate_.x -= move.x;
 	}
@@ -64,6 +67,14 @@ void Player::Update() {
 	}
 
 	Attack();
+
+	if (input_->GetGamePadLStick().x != 0 || input_->GetGamePadLStick().y != 0) {
+		move.x = input_->GetGamePadLStick().x * 0.3f;
+		move.y = input_->GetGamePadLStick().y * 0.3f;
+	}
+
+	modelinfo_.worldTransform_.data_.translate_ += move;
+	modelinfo_.worldTransform_.data_.rotate_ += rotate;
 
 	modelinfo_.Update();
 
@@ -80,8 +91,8 @@ void Player::Update() {
 	Vector3 spritePosition = { info2DReticle_.worldTransform_.GetWorldPos().x,  info2DReticle_.worldTransform_.GetWorldPos().y, 0 };
 
 	//ジョイスティック取得状態
-	spritePosition.x += input_->GetGamePadLStick().x * 10.0f;
-	spritePosition.y -= input_->GetGamePadLStick().y * 10.0f;
+	spritePosition.x += input_->GetGamePadRStick().x * 10.0f;
+	spritePosition.y -= input_->GetGamePadRStick().y * 10.0f;
 
 	info2DReticle_.worldTransform_.data_.translate_ = spritePosition;
 	info2DReticle_.Update();
@@ -121,14 +132,18 @@ void Player::DrawUI() {
 void Player::Attack() {
 	const float kBulletSpeed = 1.0f;
 
-	if (input_->IsPushGamePadRTrigger()) {
+	if (input_->IsPushGamePadRTrigger() && bulletCooldown_<= 0) {
 		Vector3 velocity = info3DReticle_.worldTransform_.GetWorldPos() - modelinfo_.worldTransform_.GetWorldPos();
 		velocity = Normalize(velocity);
 		velocity *= kBulletSpeed;
+		bulletCooldown_ = 10;
 
 		std::unique_ptr<PlayerBullet> bullet = std::make_unique<PlayerBullet>();
 		bullet->Initialize(modelinfo_.worldTransform_.GetWorldPos(), velocity);
 		bullets_.push_back(std::move(bullet));
+	}
+	else {
+		bulletCooldown_--;
 	}
 
 	for (auto itBullet = bullets_.begin(); itBullet != bullets_.end();) {

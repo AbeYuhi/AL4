@@ -23,6 +23,10 @@ void Enemy::Initialize(){
 	enemyTexture_ = TextureManager::Load("Slime.png");
 
 	baseEnemyState_.reset(new EnemyStateApproach());
+
+	//衝突属性を設定
+	SetCollisionAttribute(kCollisionAttributeEnemy);
+	SetCollisionMask(~kCollisionAttributeEnemy);
 }
 
 void Enemy::Update(){

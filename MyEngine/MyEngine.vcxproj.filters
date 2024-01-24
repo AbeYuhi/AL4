@@ -563,6 +563,9 @@
     <ClInclude Include="DirectXGame\GameObject\Entity\Collider\Collider.h">
       <Filter>ヘッダー ファイル\GameObject\Entity\Collider</Filter>
     </ClInclude>
+    <ClInclude Include="DirectXGame\GameObject\Entity\Collider\CollisionConfig.h">
+      <Filter>ヘッダー ファイル\GameObject\Entity\Collider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="External\imgui\imgui.vcxproj">

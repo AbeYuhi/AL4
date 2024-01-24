@@ -166,6 +166,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DirectXGame\Sytem\TimeCall.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DirectXGame\GameObject\Entity\Collider\CollisionConfig.h" />
     <ClInclude Include="DirectXGame\GameObject\Entity\Collider\Collider.h" />
     <ClInclude Include="DirectXGame\GameObject\Camera\RailCamera.h" />
     <ClInclude Include="DirectXGame\GameObject\Entity\Enemy\State\BaseEnemyState.h" />

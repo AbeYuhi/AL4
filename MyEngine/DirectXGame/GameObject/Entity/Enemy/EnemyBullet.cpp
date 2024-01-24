@@ -26,6 +26,10 @@ void EnemyBullet::Initialize(Vector3 pos, Vector3 velocity, Player* player) {
 	modelinfo_.worldTransform_.data_.rotate_.y = std::atan2(velocity_.x, velocity_.z);
 	float widthLength = Length({ velocity_.x, 0, velocity_.z });
 	modelinfo_.worldTransform_.data_.rotate_.x = std::atan2(-velocity_.y, widthLength);
+
+	//衝突属性を設定
+	SetCollisionAttribute(kCollisionAttributeEnemy);
+	SetCollisionMask(~kCollisionAttributeEnemy);
 }
 
 void EnemyBullet::Update() {
