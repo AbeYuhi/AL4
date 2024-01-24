@@ -163,6 +163,41 @@ Vector3 Slerp(const Vector3& v1, const Vector3& v2, float t) {
 	}
 }
 
+Vector3 CatmullRomSpline(std::vector<Vector3> controlPoints, float t) {
+	Vector3 vector = { 0, 0, 0 };
+	//controlePointsの要素数
+	auto controlPointsNum = controlPoints.size();
+	//tがどこの補間を進んでるかを求める
+	auto movedRate = 1.0f / (controlPointsNum - 1);
+	auto section = int(t / movedRate);
+
+	float sectionT = t / movedRate;
+	sectionT -= int(sectionT);
+
+	Vector3 pos = { 0, 0, 0 };
+	if (section == 0) {
+		pos = CatmullRom(controlPoints[0], controlPoints[0], controlPoints[1], controlPoints[2], sectionT);
+	}
+	else if (section == 4 || section == 5) {
+		pos = CatmullRom(controlPoints[3], controlPoints[4], controlPoints[5], controlPoints[5], sectionT);
+	}
+	else if (section >= 1 && section <= 3) {
+		pos = CatmullRom(controlPoints[section - 1], controlPoints[section], controlPoints[section + 1], controlPoints[section + 2], sectionT);
+	}
+
+	return pos;
+}
+
+Vector3 CatmullRom(const Vector3& p0, const Vector3& p1, const Vector3& p2, const Vector3& p3, float t) {
+	Vector3 p;
+
+	p.x = 1.0f / 2.0f * (((-1.0f * p0.x) + 3.0f * p1.x - (3.0f * p2.x) + p3.x) * powf(t, 3) + (2.0f * p0.x - (5.0f * p1.x) + 4.0f * p2.x - p3.x) * powf(t, 2) + (-1.0f * p0.x + p2.x) * t + 2.0f * p1.x);
+	p.y = 1.0f / 2.0f * (((-1.0f * p0.y) + 3.0f * p1.y - (3.0f * p2.y) + p3.y) * powf(t, 3) + (2.0f * p0.y - (5.0f * p1.y) + 4.0f * p2.y - p3.y) * powf(t, 2) + (-1.0f * p0.y + p2.y) * t + 2.0f * p1.y);
+	p.z = 1.0f / 2.0f * (((-1.0f * p0.z) + 3.0f * p1.z - (3.0f * p2.z) + p3.z) * powf(t, 3) + (2.0f * p0.z - (5.0f * p1.z) + 4.0f * p2.z - p3.z) * powf(t, 2) + (-1.0f * p0.z + p2.z) * t + 2.0f * p1.z);
+
+	return p;
+}
+
 #pragma endregion
 
 #pragma region Matrix4x4

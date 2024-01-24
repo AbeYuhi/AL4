@@ -324,6 +324,9 @@
     <ClCompile Include="DirectXGame\Manager\CollisionManager.cpp">
       <Filter>ソース ファイル\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="DirectXGame\Object\Line.cpp">
+      <Filter>ソース ファイル\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectXGame\Object\Triangle.h">
@@ -571,6 +574,12 @@
     </ClInclude>
     <ClInclude Include="DirectXGame\Manager\CollisionManager.h">
       <Filter>ヘッダー ファイル\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXGame\Object\Line.h">
+      <Filter>ヘッダー ファイル\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXGame\Data\LineInfo.h">
+      <Filter>ヘッダー ファイル\Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

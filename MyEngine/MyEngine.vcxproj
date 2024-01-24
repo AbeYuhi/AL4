@@ -134,6 +134,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DirectXGame\GameObject\Particle\testParticle.cpp" />
     <ClCompile Include="DirectXGame\GameObject\Light\LightObject.cpp" />
     <ClCompile Include="DirectXGame\Base\Framework\Framework.cpp" />
+    <ClCompile Include="DirectXGame\Object\Line.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="DirectXGame\Manager\AudioManager.cpp" />
     <ClCompile Include="DirectXGame\Manager\GameManager.cpp" />
@@ -249,6 +250,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DirectXGame\GameObject\Entity\Player\Player.h" />
     <ClInclude Include="DirectXGame\GameObject\Entity\Player\PlayerBullet.h" />
     <ClInclude Include="DirectXGame\Sytem\TimeCall.h" />
+    <ClInclude Include="DirectXGame\Object\Line.h" />
+    <ClInclude Include="DirectXGame\Data\LineInfo.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="External\imgui\imgui.vcxproj" />

@@ -60,6 +60,25 @@ void InGameScene::Initialize() {
 	collisionManager_->SetPlayer(player_.get());
 	collisionManager_->SetEnemy(&enemys_);
 	collisionManager_->SetEnemyBullet(&enemyBullets_);
+
+	line_ = Line::Create();
+
+	//スプライン制御点
+	controlPoints_ = {
+		{0, 0, 0},
+		{10, 10, 0},
+		{10, 15, 0},
+		{20, 15, 0},
+		{20, 0, 0},
+		{30, 0, 0},
+	};
+
+	for (int i = 0; i <= kPointCount; i++) {
+		std::unique_ptr<LineInfo> lineinfo = std::make_unique<LineInfo>();
+		lineinfo->renderItem.Initialize();
+
+		lineInfos_.push_back(std::move(lineinfo));
+	}
 }
 
 void InGameScene::Update() {
@@ -119,6 +138,10 @@ void InGameScene::Update() {
 	ImGui::Combo("blendMode", &blendMode_, modes, IM_ARRAYSIZE(modes));
 	GraphicsPipelineManager::GetInstance()->SetBlendMode(static_cast<BlendMode>(blendMode_));
 	ImGui::End();
+
+	for (auto& lineInfo : lineInfos_) {
+		lineInfo->renderItem.Update();
+	}
 }
 
 void InGameScene::Draw() {
@@ -151,7 +174,20 @@ void InGameScene::Draw() {
 		bullet->Draw();
 	}
 
-	skydome_->Draw();
+	//skydome_->Draw();
+
+	std::vector<Vector3> pointsDrawing;
+	for (size_t i = 0; i <= kPointCount; i++) {
+		float t = 1.0f / kPointCount * i;
+		Vector3 pos = CatmullRomSpline(controlPoints_, t);
+		pointsDrawing.push_back(pos);
+	}
+	for (size_t i = 0; i < pointsDrawing.size(); i++) {
+		lineInfos_[i]->startPos = pointsDrawing[i];
+		lineInfos_[i]->endPos = pointsDrawing[i + 1];
+		line_->Draw(*lineInfos_[i], {1.0f, 0.0f, 0.0f, 1.0f});
+	}
+	pointsDrawing.clear();
 
 	///オブジェクトの描画終了
 

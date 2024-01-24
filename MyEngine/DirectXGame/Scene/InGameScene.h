@@ -14,6 +14,7 @@
 #include "DirectXGame/Object/Sphere.h"
 #include "DirectXGame/Object/Model.h"
 #include "DirectXGame/Object/WireFrameBox.h"
+#include "DirectXGame/Object/Line.h"
 #include "DirectXGame/GameObject/Camera/MainCamera.h"
 #include "DirectXGame/GameObject/Camera/InGameCamera.h"
 #include "DirectXGame/GameObject/Camera/DebugCamera.h"
@@ -85,4 +86,11 @@ private:
 	std::list<std::unique_ptr<EnemyBullet>> enemyBullets_;
 
 	std::unique_ptr<Skydome> skydome_;
+
+	//スプライン制御点
+	std::vector<Vector3> controlPoints_;
+
+	const int kPointCount = 100;
+	std::vector<std::unique_ptr<LineInfo>> lineInfos_;
+	std::unique_ptr<Line> line_;
 };
