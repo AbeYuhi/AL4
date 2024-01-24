@@ -77,6 +77,6 @@ void Enemy::PopBullet() {
 
 
 	std::unique_ptr<EnemyBullet> bullet = std::make_unique<EnemyBullet>();
-	bullet->Initialize(modelinfo_.worldTransform_.data_.translate_, vector);
+	bullet->Initialize(modelinfo_.worldTransform_.data_.translate_, vector, player_);
 	gameScene_->AddBulletEnemy(std::move(bullet));
 }

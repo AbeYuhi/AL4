@@ -1,5 +1,16 @@
 #include "Vector3.h"
 
+bool operator==(const Vector3& num1, const Vector3& num2) {
+
+	if (num1.x == num2.x
+		&& num1.y == num2.y
+		&& num1.z == num2.z) {
+		return true;
+	}
+
+	return false;
+}
+
 Vector3 operator+(const Vector3& num1, const Vector3& num2) {
 	Vector3 num3;
 
