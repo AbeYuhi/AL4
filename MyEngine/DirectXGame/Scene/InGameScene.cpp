@@ -55,6 +55,11 @@ void InGameScene::Initialize() {
 	LoadEnemyPopData();
 
 	isWait_ = false;
+
+	collisionManager_ = std::make_unique<CollisionManager>();
+	collisionManager_->SetPlayer(player_.get());
+	collisionManager_->SetEnemy(&enemys_);
+	collisionManager_->SetEnemyBullet(&enemyBullets_);
 }
 
 void InGameScene::Update() {
@@ -107,38 +112,7 @@ void InGameScene::Update() {
 	skydome_->Update();
 
 	//当たり判定
-	std::list<Collider*> colliders_;
-	const std::list<std::unique_ptr<PlayerBullet>>& playerBullets = player_->GetBullets();
-	const std::list<std::unique_ptr<EnemyBullet>>& enemyBullets = enemyBullets_;
-
-	//コライダーをリストに登録
-	colliders_.push_back(player_.get());
-	for (auto& enemy : enemys_) {
-		colliders_.push_back(enemy.get());
-	}
-
-	for (auto& enemyBullet : enemyBullets) {
-		colliders_.push_back(enemyBullet.get());
-	}
-
-	for (auto& playerBullet : playerBullets) {
-		colliders_.push_back(playerBullet.get());
-	}
-
-	//リストのペアを総当たり
-	for (auto itrA = colliders_.begin(); itrA != colliders_.end(); itrA++) {
-		auto colliderA = *itrA;
-
-		//イテレーターBはイテレーターAの次の要素から回す
-		std::list<Collider*>::iterator itrB = itrA;
-		itrB++;
-		for (; itrB != colliders_.end(); ++itrB) {
-			auto colliderB = *itrB;
-
-			//ペアの当たり判定
-			CheckCollisionPair(colliderA, colliderB);
-		}
-	}
+	collisionManager_->UpDate();
 
 	ImGui::Begin("BlendMode");
 	const char* modes[] = { "None", "Normal", "Add", "SubTract", "MultiPly", "Screen"};

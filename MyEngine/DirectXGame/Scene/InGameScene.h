@@ -7,6 +7,7 @@
 #include "DirectXGame/Manager/AudioManager.h"
 #include "DirectXGame/Manager/ParticleManager.h"
 #include "DirectXGame/Manager/RandomManager.h"
+#include "DirectXGame/Manager/CollisionManager.h"
 #include "DirectXGame/Object/Triangle.h"
 #include "DirectXGame/Object/Sprite.h"
 #include "DirectXGame/Object/Plane.h"
@@ -71,6 +72,9 @@ private:
 	//ブレンドモード
 	int blendMode_;
 
+	//
+	std::unique_ptr<CollisionManager> collisionManager_;
+
 	std::unique_ptr<Player> player_;
 	std::list < std::unique_ptr<Enemy>> enemys_;
 
@@ -79,7 +83,6 @@ private:
 	int waitTime_;
 	//弾
 	std::list<std::unique_ptr<EnemyBullet>> enemyBullets_;
-
 
 	std::unique_ptr<Skydome> skydome_;
 };

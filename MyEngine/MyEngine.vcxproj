@@ -102,6 +102,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DirectXGame\Manager\CollisionManager.cpp" />
     <ClCompile Include="DirectXGame\GameObject\Entity\Collider\Collider.cpp" />
     <ClCompile Include="DirectXGame\GameObject\Camera\RailCamera.cpp" />
     <ClCompile Include="DirectXGame\GameObject\Entity\Enemy\State\BaseEnemyState.cpp" />
@@ -166,6 +167,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DirectXGame\Sytem\TimeCall.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DirectXGame\Manager\CollisionManager.h" />
     <ClInclude Include="DirectXGame\GameObject\Entity\Collider\CollisionConfig.h" />
     <ClInclude Include="DirectXGame\GameObject\Entity\Collider\Collider.h" />
     <ClInclude Include="DirectXGame\GameObject\Camera\RailCamera.h" />
