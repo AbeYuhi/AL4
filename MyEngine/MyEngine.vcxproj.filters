@@ -121,6 +121,12 @@
     <Filter Include="ヘッダー ファイル\GameObject\Skydome">
       <UniqueIdentifier>{8a69f4f8-cc8e-4841-9554-9a1832eb2ef4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Sytem">
+      <UniqueIdentifier>{effd17ac-df3f-4cf7-99da-aed003188279}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Sytem">
+      <UniqueIdentifier>{b3c6c45d-0f4f-4629-8a53-0bc0a31ca560}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -302,6 +308,9 @@
     </ClCompile>
     <ClCompile Include="DirectXGame\GameObject\Camera\RailCamera.cpp">
       <Filter>ソース ファイル\GameObject\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXGame\Sytem\TimeCall.cpp">
+      <Filter>ソース ファイル\Sytem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -538,6 +547,9 @@
     </ClInclude>
     <ClInclude Include="DirectXGame\GameObject\Camera\RailCamera.h">
       <Filter>ヘッダー ファイル\GameObject\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXGame\Sytem\TimeCall.h">
+      <Filter>ヘッダー ファイル\Sytem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

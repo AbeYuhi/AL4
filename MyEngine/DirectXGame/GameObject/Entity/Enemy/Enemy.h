@@ -10,6 +10,7 @@
 #include "DirectXGame/GameObject/Entity/Enemy/State/BaseEnemyState.h"
 #include "DirectXGame/GameObject/Entity/Enemy/State/EnemyStateApproach.h"
 #include "DirectXGame/GameObject/Entity/Enemy/State/EnemyStateLeave.h"
+#include "DirectXGame/Sytem/TimeCall.h"
 
 enum class Phase {
 	APPROACH,
@@ -32,6 +33,8 @@ public:
 
 	void OnCollision();
 
+	void Fire();
+
 	void PopBullet();
 
 public: //ゲッターセッター
@@ -47,6 +50,7 @@ public: //ゲッターセッター
 	inline void SetIsDead(bool isDead) { isDead_ = isDead; }
 	inline void SetPlayer(Player* player) { player_ = player; }
 	inline void SetGameScene(InGameScene* gameScene) { gameScene_ = gameScene; }
+	inline void ClearTimeCall() { timeCalls_.clear(); }
 
 private:
 	InputManager* input_;
@@ -68,5 +72,7 @@ private:
 
 	Player* player_;
 	InGameScene* gameScene_;
+
+	std::list<std::unique_ptr<TimeCall>> timeCalls_;
 };
 

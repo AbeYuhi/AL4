@@ -29,6 +29,18 @@ void Enemy::Update(){
 
 	baseEnemyState_->Update(this);
 
+	for (auto timeCallIt = timeCalls_.begin(); timeCallIt != timeCalls_.end();) {
+		TimeCall* timeCall = timeCallIt->get();
+
+		if (timeCall->IsFinished()) {
+			timeCallIt = timeCalls_.erase(timeCallIt);
+		}
+		else {
+			timeCall->Update();
+			timeCallIt++;
+		}
+	}
+
 	modelinfo_.Update();
 
 	if (modelinfo_.worldTransform_.GetWorldPos().z <= -10) {
@@ -43,6 +55,15 @@ void Enemy::Draw(){
 
 void Enemy::OnCollision() {
 	isDead_ = true;
+}
+
+void Enemy::Fire() {
+	//
+	PopBullet();
+
+	std::function<void(void)> callBack = std::bind(&Enemy::Fire, this);
+	std::unique_ptr<TimeCall> timeCall = std::make_unique<TimeCall>(callBack, 60);
+	timeCalls_.push_back(std::move(timeCall));
 }
 
 void Enemy::PopBullet() {

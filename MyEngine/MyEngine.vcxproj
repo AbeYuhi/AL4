@@ -162,6 +162,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DirectXGame\Scene\SceneFactory\SceneFactory.cpp" />
     <ClCompile Include="DirectXGame\GameObject\Entity\Player\Player.cpp" />
     <ClCompile Include="DirectXGame\GameObject\Entity\Player\PlayerBullet.cpp" />
+    <ClCompile Include="DirectXGame\Sytem\TimeCall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectXGame\GameObject\Camera\RailCamera.h" />
@@ -242,6 +243,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DirectXGame\Scene\SceneFactory\SceneFactory.h" />
     <ClInclude Include="DirectXGame\GameObject\Entity\Player\Player.h" />
     <ClInclude Include="DirectXGame\GameObject\Entity\Player\PlayerBullet.h" />
+    <ClInclude Include="DirectXGame\Sytem\TimeCall.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="External\imgui\imgui.vcxproj" />
