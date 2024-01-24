@@ -33,7 +33,8 @@ void InGameScene::Initialize() {
 	debugCamera_->Initialize();
 	//レールカメラ
 	railCamera_ = std::make_unique<RailCamera>();
-	railCamera_->Initialize({0, 0, -50}, {0, 0, 0});
+	railCamera_->Initialize({0, 0, 0}, {0, 0, 0});
+	railCameraSplineT_ = 0;
 
 	//スプライトカメラの初期化
 	spriteCamera_->Initialize();
@@ -90,8 +91,28 @@ void InGameScene::Update() {
 		mainCamera_->Update(debugCamera_->GetWorldMatrix(), debugCamera_->GetProjectionMatrix());
 	}
 	else {
-		//gameCamera_->Update();
-		railCamera_->Update({0, 0, -1}, {0, 0, 0});
+		Vector3 eye = {};
+		Vector3 target = {};
+		Vector3 forward = {};
+		float targetCatmull = 0;
+
+		if (railCameraSplineT_ > 1) {
+			railCameraSplineT_ = 1;
+		}
+		else {
+			railCameraSplineT_ += 1.0f / 1000;
+		}
+		targetCatmull = railCameraSplineT_ + 1.0f / 1000;
+		eye = CatmullRomSpline(controlPoints_, railCameraSplineT_);
+		target = CatmullRomSpline(controlPoints_, targetCatmull);
+		forward = target - eye;
+
+		Vector3 railCameraRotation = {};
+		railCameraRotation.y = std::atan2(fabs(forward.x), fabs(forward.z));
+		float widthLength = Length({ forward.x, 0, forward.z });
+		railCameraRotation.x = std::atan2(-forward.y, widthLength);
+
+		railCamera_->Update(eye, railCameraRotation);
 		mainCamera_->Update(railCamera_->GetWorldMatrix(), railCamera_->GetProjectionMatrix());
 	}
 	//スプライトカメラの更新
@@ -176,7 +197,7 @@ void InGameScene::Draw() {
 		Vector3 pos = CatmullRomSpline(controlPoints_, t);
 		pointsDrawing.push_back(pos);
 	}
-	for (int i = 0; i < pointsDrawing.size() - 2; i++) {
+	for (int i = 0; i < pointsDrawing.size() - 1; i++) {
 		LineInfo lineInfo;
 		lineInfo.startPos = pointsDrawing[i];
 		lineInfo.endPos = pointsDrawing[i + 1];
@@ -273,21 +294,5 @@ void InGameScene::UpdateEnemyPopCommands() {
 			//コマンドループを抜ける
 			break;
 		}
-	}
-}
-
-void InGameScene::CheckCollisionPair(Collider* colliderA, Collider* colliderB) {
-
-	if ((colliderA->GetCollisionAttribute() & colliderB->GetCollisionMask()) == 0 || (colliderA->GetCollisionMask() & colliderB->GetCollisionAttribute()) == 0) {
-		return;
-	}
-
-	Vector3 posA = colliderA->GetWorldPos();
-	Vector3 posB = colliderB->GetWorldPos();
-	float length = Length(posA, posB);
-	//交差判定
-	if (length <= colliderA->GetRadius() + colliderB->GetRadius()) {
-		colliderA->OnCollision();
-		colliderB->OnCollision();
 	}
 }

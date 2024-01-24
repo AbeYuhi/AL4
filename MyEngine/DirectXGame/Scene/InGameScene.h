@@ -48,8 +48,6 @@ public:
 
 	void UpdateEnemyPopCommands();
 
-	void CheckCollisionPair(Collider* colliderA, Collider* colliderB);
-
 private:
 	//基本機能
 	WinApp* winApp_;
@@ -66,6 +64,7 @@ private:
 	bool isDebugCamera_;
 	//レールカメラ
 	std::unique_ptr<RailCamera> railCamera_;
+	float railCameraSplineT_;
 
 	//ライト
 	std::unique_ptr<LightObject> lightObj_;

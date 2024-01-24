@@ -170,19 +170,20 @@ Vector3 CatmullRomSpline(std::vector<Vector3> controlPoints, float t) {
 	//tがどこの補間を進んでるかを求める
 	auto movedRate = 1.0f / (controlPointsNum - 1);
 	auto section = int(t / movedRate);
-
 	float sectionT = t / movedRate;
 	sectionT -= int(sectionT);
-
 	Vector3 pos = { 0, 0, 0 };
 	if (section == 0) {
 		pos = CatmullRom(controlPoints[0], controlPoints[0], controlPoints[1], controlPoints[2], sectionT);
 	}
-	else if (section == 4 || section == 5) {
+	else if (section == 4) {
 		pos = CatmullRom(controlPoints[3], controlPoints[4], controlPoints[5], controlPoints[5], sectionT);
 	}
 	else if (section >= 1 && section <= 3) {
 		pos = CatmullRom(controlPoints[section - 1], controlPoints[section], controlPoints[section + 1], controlPoints[section + 2], sectionT);
+	}
+	else {
+		pos = CatmullRom(controlPoints[3], controlPoints[4], controlPoints[5], controlPoints[5], t);
 	}
 
 	return pos;

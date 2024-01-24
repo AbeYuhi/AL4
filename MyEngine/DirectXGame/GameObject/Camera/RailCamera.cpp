@@ -19,8 +19,8 @@ void RailCamera::Initialize(Vector3 position, Vector3 rotate) {
 
 void RailCamera::Update(Vector3 translation, Vector3 rotate) {
 
-	worldTransform_.data_.translate_ += translation;
-	worldTransform_.data_.rotate_ += rotate;
+	worldTransform_.data_.translate_ = translation;
+	worldTransform_.data_.rotate_ = rotate;
 
 	worldTransform_.UpdateWorld();
 	viewMatrix_ = Inverse(worldTransform_.worldMatrix_);
