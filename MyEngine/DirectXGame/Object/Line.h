@@ -41,5 +41,7 @@ private: //メンバ変数
 
 	//オブジェクトのローカル情報
 	VertexData* vertexData_;
+
+	RenderItem renderItem_;
 };
 

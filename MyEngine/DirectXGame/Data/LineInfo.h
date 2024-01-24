@@ -5,6 +5,4 @@
 struct LineInfo {
 	Vector3 startPos;
 	Vector3 endPos;
-
-	RenderItem renderItem;
 };

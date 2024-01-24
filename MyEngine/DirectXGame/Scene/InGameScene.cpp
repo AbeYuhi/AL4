@@ -61,8 +61,6 @@ void InGameScene::Initialize() {
 	collisionManager_->SetEnemy(&enemys_);
 	collisionManager_->SetEnemyBullet(&enemyBullets_);
 
-	line_ = Line::Create();
-
 	//スプライン制御点
 	controlPoints_ = {
 		{0, 0, 0},
@@ -73,11 +71,11 @@ void InGameScene::Initialize() {
 		{30, 0, 0},
 	};
 
-	for (int i = 0; i <= kPointCount; i++) {
-		std::unique_ptr<LineInfo> lineinfo = std::make_unique<LineInfo>();
-		lineinfo->renderItem.Initialize();
+	for (int i = 0; i < kPointCount; i++) {
+		std::unique_ptr<Line> line = std::make_unique<Line>();
+		line = Line::Create();
 
-		lineInfos_.push_back(std::move(lineinfo));
+		lines_.push_back(std::move(line));
 	}
 }
 
@@ -138,10 +136,6 @@ void InGameScene::Update() {
 	ImGui::Combo("blendMode", &blendMode_, modes, IM_ARRAYSIZE(modes));
 	GraphicsPipelineManager::GetInstance()->SetBlendMode(static_cast<BlendMode>(blendMode_));
 	ImGui::End();
-
-	for (auto& lineInfo : lineInfos_) {
-		lineInfo->renderItem.Update();
-	}
 }
 
 void InGameScene::Draw() {
@@ -182,10 +176,11 @@ void InGameScene::Draw() {
 		Vector3 pos = CatmullRomSpline(controlPoints_, t);
 		pointsDrawing.push_back(pos);
 	}
-	for (size_t i = 0; i < pointsDrawing.size(); i++) {
-		lineInfos_[i]->startPos = pointsDrawing[i];
-		lineInfos_[i]->endPos = pointsDrawing[i + 1];
-		line_->Draw(*lineInfos_[i], {1.0f, 0.0f, 0.0f, 1.0f});
+	for (int i = 0; i < pointsDrawing.size() - 2; i++) {
+		LineInfo lineInfo;
+		lineInfo.startPos = pointsDrawing[i];
+		lineInfo.endPos = pointsDrawing[i + 1];
+		lines_[i]->Draw(lineInfo, {1.0f, 0.0f, 0.0f, 1.0f});
 	}
 	pointsDrawing.clear();
 

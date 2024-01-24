@@ -91,6 +91,5 @@ private:
 	std::vector<Vector3> controlPoints_;
 
 	const int kPointCount = 100;
-	std::vector<std::unique_ptr<LineInfo>> lineInfos_;
-	std::unique_ptr<Line> line_;
+	std::vector<std::unique_ptr<Line>> lines_;
 };

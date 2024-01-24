@@ -37,6 +37,8 @@ void Line::Initialize() {
 	vertexData_[1].position = { 0.0f, 0.0f, 0.0f, 1.0f }; //右上
 	vertexData_[1].texcoord = { 0.0f, 0.0f };
 	vertexData_[1].normal = { 0.0f, 0.0f, 1.0f };
+
+	renderItem_.Initialize();
 }
 
 void Line::Draw(LineInfo segment, Vector4 color) {
@@ -44,7 +46,7 @@ void Line::Draw(LineInfo segment, Vector4 color) {
 	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
 	GraphicsPipelineManager* psoManager = GraphicsPipelineManager::GetInstance();
 
-	segment.renderItem.materialInfo_.material_->color = color;
+	renderItem_.Update();
 
 	vertexData_[0].position.x = segment.startPos.x;
 	vertexData_[0].position.y = segment.startPos.y;
@@ -67,9 +69,9 @@ void Line::Draw(LineInfo segment, Vector4 color) {
 	//VBVの設定
 	dxCommon->GetCommandList()->IASetVertexBuffers(0, 1, &vertexBufferView_);
 	//マテリアルCBufferの場所を設定
-	dxCommon->GetCommandList()->SetGraphicsRootConstantBufferView(0, segment.renderItem.materialInfo_.resource_->GetGPUVirtualAddress());
+	dxCommon->GetCommandList()->SetGraphicsRootConstantBufferView(0, renderItem_.materialInfo_.resource_->GetGPUVirtualAddress());
 	//wvpCBufferの場所を設定
-	dxCommon->GetCommandList()->SetGraphicsRootConstantBufferView(1, segment.renderItem.worldTransform_.resource_->GetGPUVirtualAddress());
+	dxCommon->GetCommandList()->SetGraphicsRootConstantBufferView(1, renderItem_.worldTransform_.resource_->GetGPUVirtualAddress());
 	//SRVのDescriptorTableの先頭を設定、2はrootParameter[2]である
 	dxCommon->GetCommandList()->SetGraphicsRootDescriptorTable(2, textureManager->GetTextureHandleGPU(1));
 	//描画
