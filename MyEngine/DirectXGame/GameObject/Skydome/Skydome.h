@@ -15,6 +15,8 @@ public:
 
 	void Draw();
 
+	inline void SetParent(const Matrix4x4* parent) { modelInfo_.worldTransform_.parent_ = parent; }
+
 private:
 	std::unique_ptr<Model> model_ = nullptr;
 	RenderItem modelInfo_;

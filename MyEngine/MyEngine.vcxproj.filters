@@ -327,6 +327,9 @@
     <ClCompile Include="DirectXGame\Object\Line.cpp">
       <Filter>ソース ファイル\Object</Filter>
     </ClCompile>
+    <ClCompile Include="DirectXGame\Sytem\SceneTransition.cpp">
+      <Filter>ソース ファイル\Sytem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectXGame\Object\Triangle.h">
@@ -580,6 +583,9 @@
     </ClInclude>
     <ClInclude Include="DirectXGame\Data\LineInfo.h">
       <Filter>ヘッダー ファイル\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXGame\Sytem\SceneTransition.h">
+      <Filter>ヘッダー ファイル\Sytem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

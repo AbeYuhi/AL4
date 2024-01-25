@@ -1,5 +1,6 @@
 #pragma once
 #include "DirectXGame/Data/RenderItem.h"
+#include "DirectXGame/Math/Math.h"
 #include "DirectXGame/Manager/TextureManager.h"
 #include "DirectXGame/Manager/AudioManager.h"
 #include "DirectXGame/Manager/RandomManager.h"
@@ -52,6 +53,7 @@ public: //ゲッターセッター
 	inline void SetPlayer(Player* player) { player_ = player; }
 	inline void SetGameScene(InGameScene* gameScene) { gameScene_ = gameScene; }
 	inline void ClearTimeCall() { timeCalls_.clear(); }
+	inline void SetParent(const Matrix4x4* parent) { modelinfo_.worldTransform_.parent_ = parent; }
 
 private:
 	InputManager* input_;
@@ -70,6 +72,8 @@ private:
 	int bulletCoolDown_;
 
 	bool isDead_;
+	int popTime_;
+	float t_;
 
 	Player* player_;
 	InGameScene* gameScene_;

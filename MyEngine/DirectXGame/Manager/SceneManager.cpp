@@ -17,9 +17,12 @@ void SceneManager::Initialize(GameScene gameScene){
 
 	//初期シーンの初期化
 	scene_->Initialize();
+
+	sceneTransition_ = std::make_unique<SceneTransition>();
+	sceneTransition_->SetIsTransition(false);
 }
 
-void SceneManager::Update(){
+void SceneManager::Update() {
 	preSceneNo_ = sceneNo_;
 	sceneNo_ = scene_->GetSceneNo();
 	ImGui::Begin("GameScene");
@@ -34,13 +37,30 @@ void SceneManager::Update(){
 		scene_ = sceneFactory_->CreateScene((GameScene)sceneNo_);
 		//シーンの初期化
 		scene_->Initialize();
+		//画面遷移の初期化
+		sceneTransition_.reset();
+		sceneTransition_ = std::make_unique<SceneTransition>();
+		sceneTransition_->Initialize();
 	}
 
-	//シーンの更新
-	scene_->Update();
+	if (sceneTransition_->IsTransition()) {
+		sceneTransition_->Update();
+		if (!sceneTransition_->IsTransition()) {
+			scene_->Update();
+		}
+	}
+	else {
+		//シーンの更新
+		scene_->Update();
+	}
 }
 
-void SceneManager::Draw(){
-	//シーンの描画
-	scene_->Draw();
+void SceneManager::Draw() {
+	if (sceneTransition_->IsTransition()) {
+		sceneTransition_->Draw();
+	}
+	else {
+		//シーンの描画
+		scene_->Draw();
+	}
 }

@@ -4,7 +4,7 @@
 void EnemyStateLeave::Update(Enemy* enemy_) {
 
 	enemy_->MovePos({ 0, 0, 0.75f });
-	if (enemy_->GetPos().z >= 50) {
+	if (enemy_->GetPos().z >= 100) {
 		enemy_->Fire();
 		enemy_->ChangePhase(new EnemyStateApproach());
 	}

@@ -166,6 +166,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DirectXGame\GameObject\Entity\Player\Player.cpp" />
     <ClCompile Include="DirectXGame\GameObject\Entity\Player\PlayerBullet.cpp" />
     <ClCompile Include="DirectXGame\Sytem\TimeCall.cpp" />
+    <ClCompile Include="DirectXGame\Sytem\SceneTransition.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectXGame\Manager\CollisionManager.h" />
@@ -252,6 +253,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DirectXGame\Sytem\TimeCall.h" />
     <ClInclude Include="DirectXGame\Object\Line.h" />
     <ClInclude Include="DirectXGame\Data\LineInfo.h" />
+    <ClInclude Include="DirectXGame\Sytem\SceneTransition.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="External\imgui\imgui.vcxproj" />

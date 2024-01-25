@@ -52,6 +52,7 @@ void InGameScene::Initialize() {
 
 	skydome_ = std::make_unique<Skydome>();
 	skydome_->Initialize();
+	skydome_->SetParent(mainCamera_->GetPWorldMatrix());
 
 	LoadEnemyPopData();
 
@@ -72,6 +73,7 @@ void InGameScene::Initialize() {
 		{30, 0, 0},
 	};
 
+	isLineDraw_ = false;
 	for (int i = 0; i < kPointCount; i++) {
 		std::unique_ptr<Line> line = std::make_unique<Line>();
 		line = Line::Create();
@@ -189,21 +191,23 @@ void InGameScene::Draw() {
 		bullet->Draw();
 	}
 
-	//skydome_->Draw();
+	skydome_->Draw();
 
-	std::vector<Vector3> pointsDrawing;
-	for (size_t i = 0; i <= kPointCount; i++) {
-		float t = 1.0f / kPointCount * i;
-		Vector3 pos = CatmullRomSpline(controlPoints_, t);
-		pointsDrawing.push_back(pos);
+	if (isLineDraw_) {
+		std::vector<Vector3> pointsDrawing;
+		for (size_t i = 0; i <= kPointCount; i++) {
+			float t = 1.0f / kPointCount * i;
+			Vector3 pos = CatmullRomSpline(controlPoints_, t);
+			pointsDrawing.push_back(pos);
+		}
+		for (int i = 0; i < pointsDrawing.size() - 1; i++) {
+			LineInfo lineInfo;
+			lineInfo.startPos = pointsDrawing[i];
+			lineInfo.endPos = pointsDrawing[i + 1];
+			lines_[i]->Draw(lineInfo, { 1.0f, 0.0f, 0.0f, 1.0f });
+		}
+		pointsDrawing.clear();
 	}
-	for (int i = 0; i < pointsDrawing.size() - 1; i++) {
-		LineInfo lineInfo;
-		lineInfo.startPos = pointsDrawing[i];
-		lineInfo.endPos = pointsDrawing[i + 1];
-		lines_[i]->Draw(lineInfo, {1.0f, 0.0f, 0.0f, 1.0f});
-	}
-	pointsDrawing.clear();
 
 	///オブジェクトの描画終了
 
@@ -224,6 +228,7 @@ void InGameScene::PopEnemy(Vector3 enemyPos) {
 	enemy->SetPlayer(player_.get());
 	enemy->SetGameScene(this);
 	enemy->SetPos(enemyPos);
+	enemy->SetParent(mainCamera_->GetPWorldMatrix());
 	enemys_.push_back(std::move(enemy));
 }
 

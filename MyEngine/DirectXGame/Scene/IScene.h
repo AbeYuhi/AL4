@@ -1,5 +1,10 @@
 #pragma once
 #include "DirectXGame/Manager/TextureManager.h"
+#include "DirectXGame/Manager/ImGuiManager.h"
+#include "DirectXGame/Manager/InputManager.h"
+#include "DirectXGame/Manager/AudioManager.h"
+#include "DirectXGame/GameObject/Camera/MainCamera.h"
+#include "DirectXGame/GameObject/Camera/SpriteCamera.h"
 
 enum GameScene {
 	TITLE, INGAME, MENU, GAMEOVER, GAMECLEAR, SCENENUM

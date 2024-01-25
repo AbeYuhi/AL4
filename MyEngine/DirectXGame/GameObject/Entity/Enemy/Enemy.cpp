@@ -13,8 +13,8 @@ void Enemy::Initialize(){
 	//モデルの生成
 	model_ = Model::Create();
 	modelinfo_.Initialize();
-	modelinfo_.worldTransform_.data_.translate_.y = 2;
-	modelinfo_.worldTransform_.data_.translate_.z = 50;
+	modelinfo_.worldTransform_.data_.scale_ *= 5;
+	t_ = 0;
 
 	bulletCoolDown_ = 0;
 	isDead_ = false;
@@ -27,11 +27,14 @@ void Enemy::Initialize(){
 	//衝突属性を設定
 	SetCollisionAttribute(kCollisionAttributeEnemy);
 	SetCollisionMask(~kCollisionAttributeEnemy);
+
+	popTime_ = 0;
 }
 
 void Enemy::Update(){
 
 	baseEnemyState_->Update(this);
+	popTime_++;
 
 	for (auto timeCallIt = timeCalls_.begin(); timeCallIt != timeCalls_.end();) {
 		TimeCall* timeCall = timeCallIt->get();
@@ -45,9 +48,17 @@ void Enemy::Update(){
 		}
 	}
 
+	if (t_ < 1.0f) {
+		t_ += 0.05f;
+	}
+	else {
+		t_ = 1.0f;
+	}
+	modelinfo_.worldTransform_.data_.scale_ = Lerp({ 5.0f, 5.0f ,5.0f }, { 1.0f, 1.0f, 1.0f }, t_);
+
 	modelinfo_.Update();
 
-	if (modelinfo_.worldTransform_.GetWorldPos().z <= -10) {
+	if (popTime_ >= 20 * 60) {
 		isDead_ = true;
 	}
 
@@ -81,6 +92,6 @@ void Enemy::PopBullet() {
 
 
 	std::unique_ptr<EnemyBullet> bullet = std::make_unique<EnemyBullet>();
-	bullet->Initialize(modelinfo_.worldTransform_.data_.translate_, vector, player_);
+	bullet->Initialize(modelinfo_.worldTransform_.GetWorldPos(), vector, player_);
 	gameScene_->AddBulletEnemy(std::move(bullet));
 }

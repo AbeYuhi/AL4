@@ -3,6 +3,7 @@
 #include "DirectXGame/Scene/IScene.h"
 #include "DirectXGame/Scene/SceneFactory/SceneFactory.h"
 #include "DirectXGame/Manager/ImGuiManager.h"
+#include "DirectXGame/Sytem/SceneTransition.h"
 
 class SceneManager
 {
@@ -31,6 +32,9 @@ private:
 
 	//シーンファクトリー
 	SceneFactory* sceneFactory_;
+
+	//画面遷移
+	std::unique_ptr<SceneTransition> sceneTransition_;
 
 	//ゲームシーン
 	std::unique_ptr<IScene> scene_;

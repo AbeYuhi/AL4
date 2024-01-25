@@ -89,6 +89,7 @@ private:
 	//スプライン制御点
 	std::vector<Vector3> controlPoints_;
 
+	bool isLineDraw_;
 	const int kPointCount = 100;
 	std::vector<std::unique_ptr<Line>> lines_;
 };
