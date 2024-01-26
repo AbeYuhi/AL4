@@ -73,7 +73,7 @@ void InGameScene::Initialize() {
 		{30, 0, 0},
 	};
 
-	isLineDraw_ = false;
+	isLineDraw_ = true;
 	for (int i = 0; i < kPointCount; i++) {
 		std::unique_ptr<Line> line = std::make_unique<Line>();
 		line = Line::Create();
