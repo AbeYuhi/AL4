@@ -13,8 +13,7 @@ void Enemy::Initialize(){
 	//モデルの生成
 	model_ = Model::Create();
 	modelinfo_.Initialize();
-	modelinfo_.worldTransform_.data_.scale_ *= 5;
-	t_ = 0;
+	t_ = 1.0f;
 
 	bulletCoolDown_ = 0;
 	isDead_ = false;
@@ -54,7 +53,7 @@ void Enemy::Update(){
 	else {
 		t_ = 1.0f;
 	}
-	modelinfo_.worldTransform_.data_.scale_ = Lerp({ 5.0f, 5.0f ,5.0f }, { 1.0f, 1.0f, 1.0f }, t_);
+	modelinfo_.worldTransform_.data_.scale_ = Lerp({ 3.0f, 3.0f ,3.0f }, { 1.0f, 1.0f, 1.0f }, t_);
 
 	modelinfo_.Update();
 
@@ -75,6 +74,8 @@ void Enemy::OnCollision() {
 void Enemy::Fire() {
 	//
 	PopBullet();
+
+	t_ = 0.0f;
 
 	std::function<void(void)> callBack = std::bind(&Enemy::Fire, this);
 	std::unique_ptr<TimeCall> timeCall = std::make_unique<TimeCall>(callBack, 60);
