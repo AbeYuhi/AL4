@@ -14,6 +14,10 @@ void GameClearScene::Initialize() {
 
 void GameClearScene::Update() {
 
+	if (InputManager::GetInstance()->IsPushGamePadbutton(XINPUT_GAMEPAD_A)) {
+		sceneNo_ = TITLE;
+	}
+
 }
 
 void GameClearScene::Draw() {

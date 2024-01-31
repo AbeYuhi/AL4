@@ -26,7 +26,7 @@ void TitleScene::Initialize() {
 void TitleScene::Update() {
 	SpriteCamera::GetInstance()->Update();
 
-	if (InputManager::GetInstance()->IsTriggerKey(DIK_SPACE)) {
+	if (InputManager::GetInstance()->IsTriggerKey(DIK_SPACE) || InputManager::GetInstance()->IsPushGamePadbutton(XINPUT_GAMEPAD_A)) {
 		sceneNo_ = INGAME;
 	}
 

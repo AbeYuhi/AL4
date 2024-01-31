@@ -23,7 +23,8 @@ void InGameScene::Initialize() {
 	spriteCamera_ = SpriteCamera::GetInstance();
 
 	//デバックモード中ならdebugカメラを有効に
-	isDebugCamera_ = debugMode_;
+	//isDebugCamera_ = debugMode_;
+	isDebugCamera_ = false;
 
 	//インゲームカメラ
 	gameCamera_ = std::make_unique<InGameCamera>();
@@ -73,7 +74,7 @@ void InGameScene::Initialize() {
 		{30, 0, 0},
 	};
 
-	isLineDraw_ = false;
+	isLineDraw_ = true;
 	for (int i = 0; i < kPointCount; i++) {
 		std::unique_ptr<Line> line = std::make_unique<Line>();
 		line = Line::Create();
@@ -122,6 +123,10 @@ void InGameScene::Update() {
 	//ライトの更新
 	lightObj_->Update();
 
+	if (railCameraSplineT_ == 1) {
+		sceneNo_ = GAMECLEAR;
+	}
+
 	player_->Update();
 
 	UpdateEnemyPopCommands();
@@ -137,6 +142,7 @@ void InGameScene::Update() {
 		itEnemy++;
 	}
 
+	
 	for (auto itBullet = enemyBullets_.begin(); itBullet != enemyBullets_.end();) {
 		EnemyBullet* bullet = itBullet->get();
 
